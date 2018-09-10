@@ -21,5 +21,12 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: <%= ENV['SPOTLIGHT_ADAPTER'] || "sqlite3" %>
+  database: <%= ENV['SPOTLIGHT_DB'] || 'db/production.sqlite3' %>
+  encoding: utf8
+  reconnect: false
+  username: <%= ENV['SPOTLIGHT_DB_USERNAME'] %>
+  password: <%= ENV['SPOTLIGHT_DB_PASSWORD'] %>
+  host: <%= ENV['SPOTLIGHT_DB_HOST'] %>
+  pool: 5
+  timeout: 5000
