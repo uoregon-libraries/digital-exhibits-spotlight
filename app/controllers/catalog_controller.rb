@@ -25,21 +25,26 @@ class CatalogController < ApplicationController
     config.document_unique_id_param = 'ids'
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'full_title_tesim'
+    config.index.title_field = 'desc_metadata__title_tesim'
     config.thumbnail_image_url = :oembed_url_ssm
     config.add_search_field 'all_fields', label: 'Everything'
 
     config.add_sort_field 'relevance', sort: 'score desc', label: 'Relevance'
-
-    config.add_index_field 'creator_tesim', label: 'Creator'
-    config.add_index_field 'photographer_tesim', label: 'Photographer'
-    config.add_index_field 'subject_tesim', label: 'Subject'
-    config.add_index_field 'description_tesim', label: 'Item Description'
-    config.add_index_field 'set_tesim', label: 'Set'
+    config.add_index_field 'desc_metadata__set_label_ssim', label: 'Set'
 
     config.add_field_configuration_to_solr_request!
 
+    OregonDigitalProperties.propertyList.each do |property|
+      fieldlabel = I18n.t property.to_s || labelize(property.to_s)
+      config.add_show_field "desc_metadata__#{property}_ssm", label: fieldlabel
+    end
+
     # Set which views by default only have the title displayed, e.g.,
     # config.view.gallery.title_only_by_default = true
+  end
+
+  def labelize(field)
+    label_arr = field.underscore.split("_").map{ |str| str.capitalize}
+    label_arr.join(" ")
   end
 end

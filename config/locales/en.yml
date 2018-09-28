@@ -36,3 +36,8 @@ en:
     form:
       title: "OregonDigital JSON"
       add_item: "Ingest It"
+
+  lcsubject: 'LC Subject'
+  localCollectionID: 'Local Collection ID'
+  localCopyShelfLocator: 'Item Locator'
+  od_repository: 'Repository'
