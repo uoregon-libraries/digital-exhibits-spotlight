@@ -3,6 +3,11 @@
 class CatalogController < ApplicationController
   include Blacklight::Catalog
 
+  def self.labelize(field)
+    label_arr = field.underscore.split("_").map{ |str| str.capitalize}
+    label_arr.join(" ")
+  end
+
   configure_blacklight do |config|
           config.show.oembed_field = :oembed_url_ssm
           config.show.partials.insert(1, :oembed)
@@ -35,16 +40,12 @@ class CatalogController < ApplicationController
     config.add_field_configuration_to_solr_request!
 
     OregonDigitalProperties.propertyList.each do |property|
-      fieldlabel = I18n.t property.to_s || labelize(property.to_s)
-      config.add_show_field "desc_metadata__#{property}_ssm", label: fieldlabel
+      fieldlabel = I18n.t property.to_s, :scope => :oregon_digital_properties, :default => labelize(property.to_s)
+      config.add_show_field "desc_metadata__#{property.to_s}_ssm", label: fieldlabel
     end
 
     # Set which views by default only have the title displayed, e.g.,
     # config.view.gallery.title_only_by_default = true
   end
 
-  def labelize(field)
-    label_arr = field.underscore.split("_").map{ |str| str.capitalize}
-    label_arr.join(" ")
-  end
 end

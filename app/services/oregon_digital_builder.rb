@@ -14,10 +14,15 @@ class OregonDigitalBuilder < Spotlight::SolrDocumentBuilder
         if key.start_with? "desc_metadata"
           if key.include? "label"
             new_val = extract_label(val)
-            out_doc[key.gsub("ssm", "ssim")] = new_val
-            out_doc[key] = new_val
+            new_key = key.gsub("_label", "")
+            out_doc[new_key] = new_val
+            out_doc[new_key.gsub("ssm", "sim")] = new_val
+            out_doc[new_key.gsub("ssm", "ssim")] = val
+          else
+            if !out_doc[key]
+              out_doc[key] = val
+            end
           end
-          out_doc[key] = val
         end
       end
       out_doc

@@ -179,4 +179,7 @@ class OregonDigitalProperties
     :hasNumber,
     :onPages
   ]
+  def self.propertyList
+    @@propertyList
+  end
 end

@@ -56,8 +56,9 @@
     <!-- string (_s...) -->
 <!--
     <dynamicField name="*_si" type="string" stored="false" indexed="true" multiValued="false"/>
-    <dynamicField name="*_sim" type="string" stored="false" indexed="true" multiValued="true"/>
 -->
+    <dynamicField name="*_sim" type="string" stored="false" indexed="true" multiValued="true"/>
+
     <dynamicField name="*_ss" type="string" stored="true" indexed="false" multiValued="false"/>
     <dynamicField name="*_ssm" type="string" stored="true" indexed="false" multiValued="true"/>
     <dynamicField name="*_ssi" type="string" stored="true" indexed="true" multiValued="false"/>
