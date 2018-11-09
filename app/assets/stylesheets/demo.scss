@@ -1,3 +1,14 @@
+body {
+  margin-bottom: 0px !important;
+}
+
+#main-container {
+  min-height: 300px;
+}
 .navbar-brand {
   width: 250px !important;
-  }
+  height: 55px !important;
+  background-size: 250px 35px !important;
+  background-position-y: 10px !important;
+}
+
