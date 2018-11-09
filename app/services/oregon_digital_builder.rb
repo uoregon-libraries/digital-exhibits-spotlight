@@ -8,6 +8,7 @@ class OregonDigitalBuilder < Spotlight::SolrDocumentBuilder
         Spotlight::Engine.config.thumbnail_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
         Spotlight::Engine.config.full_image_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
         oembed_url_ssm: ENV['OD_URL'] + "/resource/#{in_doc['id']}",
+        pid_ssm: doc['id']
       }
 
       in_doc.each do |key, val|
