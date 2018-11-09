@@ -1,23 +1,33 @@
 require 'open-uri'
 class OregonDigitalBuilder < Spotlight::SolrDocumentBuilder
   def to_solr
-    doc = get_data(resource.url)
-    if !doc.nil?
-      {
-        id: doc['id'],
-        full_title_tesim: doc['desc_metadata__title_tesim'],
-        Spotlight::Engine.config.thumbnail_field => ENV['OD_URL'] + "/downloads/#{doc['id']}.jpg",
-        Spotlight::Engine.config.full_image_field => ENV['OD_URL'] + "/downloads/#{doc['id']}.jpg",
-        oembed_url_ssm: ENV['OD_URL'] + "/resource/#{doc['id']}",
-        creator_ssim: extract_label(doc['desc_metadata__creator_label_ssm']),
-        photographer_ssim: extract_label(doc['desc_metadata__photographer_label_ssm']),
-        description_tesim: doc['desc_metadata__description_tesim'],
-        subject_ssim: extract_label(doc['desc_metadata__lcsubject_label_ssm']),
-        set_ssim: extract_label(doc['desc_metadata__set_label_ssm'])
-     }
-    else
-      nil
+    in_doc = get_data(resource.url)
+    if !in_doc.nil?
+      out_doc = {
+        id: in_doc['id'],
+        Spotlight::Engine.config.thumbnail_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
+        Spotlight::Engine.config.full_image_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
+        oembed_url_ssm: ENV['OD_URL'] + "/resource/#{in_doc['id']}",
+      }
+
+      in_doc.each do |key, val|
+        if key.start_with? "desc_metadata"
+          if key.include? "label"
+            new_val = extract_label(val)
+            new_key = key.gsub("_label", "")
+            out_doc[new_key] = new_val
+            out_doc[new_key.gsub("ssm", "sim")] = new_val
+            out_doc[new_key.gsub("ssm", "ssim")] = val
+          else
+            if !out_doc[key]
+              out_doc[key] = val
+            end
+          end
+        end
+      end
+      out_doc
     end
+
   end
 
   def get_data(url)
@@ -25,13 +35,13 @@ class OregonDigitalBuilder < Spotlight::SolrDocumentBuilder
       content = JSON.parse(open(url).read)
       content['response']['document']
     rescue
-      nil
+      raise
     end
   end
 
-  def extract_label(arr)
-    return [] unless !arr.nil?
+  def extract_label(val)
     new_arr = []
+    arr = (val.respond_to? :each) ? val : [val]
     arr.each do |item|
       parts = item.split("$")
       if !parts[0].include? "http"
