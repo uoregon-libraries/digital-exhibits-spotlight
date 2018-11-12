@@ -30,6 +30,9 @@ Rails.application.routes.draw do
   resources :exhibits, only: [] do
     resources :oregon_digital_resources, controller: 'oregon_digital/resources',  only: [:create, :update] do
     end
+    resources :oregon_digital_list_uploads, controller: 'oregon_digital/list_upload',  only: [:create] do
+    end
+
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
