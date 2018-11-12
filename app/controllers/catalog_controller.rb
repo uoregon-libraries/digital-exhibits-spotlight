@@ -41,7 +41,7 @@ class CatalogController < ApplicationController
 
     config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
 
-    OregonDigitalProperties.propertyList.each do |property|
+    OregonDigital::Properties.propertyList.each do |property|
       fieldlabel = I18n.t property.to_s, :scope => :oregon_digital_properties, :default => labelize(property.to_s)
       config.add_show_field "desc_metadata__#{property.to_s}_ssm", label: fieldlabel
     end

@@ -1,5 +1,6 @@
 require 'open-uri'
-class OregonDigitalBuilder < Spotlight::SolrDocumentBuilder
+module OregonDigital
+class SolrDocumentBuilder < Spotlight::SolrDocumentBuilder
   def to_solr
     in_doc = get_data(resource.url)
     if !in_doc.nil?
@@ -8,7 +9,7 @@ class OregonDigitalBuilder < Spotlight::SolrDocumentBuilder
         Spotlight::Engine.config.thumbnail_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
         Spotlight::Engine.config.full_image_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
         oembed_url_ssm: ENV['OD_URL'] + "/resource/#{in_doc['id']}",
-        pid_ssm: doc['id']
+        pid_ssm: in_doc['id']
       }
 
       in_doc.each do |key, val|
@@ -51,5 +52,5 @@ class OregonDigitalBuilder < Spotlight::SolrDocumentBuilder
     end
     new_arr
   end
-
+end
 end
