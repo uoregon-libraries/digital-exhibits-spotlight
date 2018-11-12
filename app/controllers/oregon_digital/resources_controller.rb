@@ -4,10 +4,11 @@ class ResourcesController < ApplicationController
   before_action :build_resource
   def create
     if @resource.save_and_index
-      redirect_to spotlight.admin_exhibit_catalog_path(current_exhibit)
+      flash[:notice] = "Saved resource from source: #{resource_params[:url]}"
+      redirect_back(fallback_location: spotlight.exhibit_resources_path(current_exhibit))
     else
       flash[:notice] = @resource.errors[:base]
-      redirect_to spotlight.admin_exhibit_catalog_path(current_exhibit)
+      redirect_back(fallback_location: spotlight.exhibit_resources_path(current_exhibit))
     end
   end
 
