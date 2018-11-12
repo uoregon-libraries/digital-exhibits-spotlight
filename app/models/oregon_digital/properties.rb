@@ -1,4 +1,5 @@
-class OregonDigitalProperties
+module OregonDigital
+class Properties
   @@propertyList = [
     :title,
     :alternative,
@@ -182,4 +183,5 @@ class OregonDigitalProperties
   def self.propertyList
     @@propertyList
   end
+end
 end

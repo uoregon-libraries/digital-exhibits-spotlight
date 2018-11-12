@@ -32,14 +32,15 @@
 en:
   hello: "Hello world"
 
-  oregon_digital_resources:
-    form:
-      title: "OregonDigital JSON"
-      add_item: "Ingest It"
+  oregon_digital:
+    resources:
+      form:
+        title: "OregonDigital JSON"
+        add_item: "Ingest It"
 
-  oregon_digital_properties:
-    lcsubject: 'LC Subject'
-    localCollectionID: 'Local Collection ID'
-    localCopyShelfLocator: 'Item Locator'
-    od_repository: 'Repository'
-    date: 'Date'
+    properties:
+      lcsubject: 'LC Subject'
+      localCollectionID: 'Local Collection ID'
+      localCopyShelfLocator: 'Item Locator'
+      od_repository: 'Repository'
+      date: 'Date'

@@ -1,4 +1,0 @@
-<%= form_for([current_exhibit, @resource.becomes(OregonDigitalResource)]) do |f| %>
-  <%= f.text_field :url  %>
-  <%= f.submit t('.add_item'), class: 'btn btn-primary' %>
-<% end if can? :manage, OregonDigitalResource %>

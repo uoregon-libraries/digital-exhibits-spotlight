@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :exhibits, only: [] do
-    resources :oregon_digital_resources, only: [:create, :update] do
+    resources :oregon_digital_resources, controller: 'oregon_digital/resources',  only: [:create, :update] do
     end
   end
 

@@ -1,4 +1,5 @@
-class OregonDigitalResourcesController < ApplicationController
+module OregonDigital
+class ResourcesController < ApplicationController
   load_and_authorize_resource :exhibit, class: Spotlight::Exhibit
   before_action :build_resource
   def create
@@ -14,7 +15,7 @@ class OregonDigitalResourcesController < ApplicationController
 
   def build_resource
     @resource = begin
-      r = OregonDigitalResource.new(resource_params)
+      r = Resource.new(resource_params)
       r.exhibit = current_exhibit
       r
     end
@@ -23,4 +24,5 @@ class OregonDigitalResourcesController < ApplicationController
   def resource_params
     params.require(:oregon_digital_resource).permit(:url)
   end
+end
 end
