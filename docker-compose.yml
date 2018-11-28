@@ -6,7 +6,7 @@ services:
       - "8983:8983"
     volumes:
       - data-solr-dev:/opt/solr/server/solr/mycores/
-      - ./solr/config:/opt/solr/server/solr/mycores/mycore/conf/
+      - ./solr/config:/opt/solr/server/solr/configsets/data_driven_schema_configs
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
