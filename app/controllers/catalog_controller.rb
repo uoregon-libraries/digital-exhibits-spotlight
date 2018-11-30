@@ -30,7 +30,7 @@ class CatalogController < ApplicationController
     config.document_unique_id_param = 'ids'
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'desc_metadata__title_tesim'
+    config.index.title_field = 'full_title_tesim'
     config.thumbnail_image_url = :oembed_url_ssm
     config.add_search_field 'all_fields', label: 'Everything'
 
