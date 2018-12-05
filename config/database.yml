@@ -29,6 +29,8 @@ test:
 
 production: &production
   <<: *default
+  host: <%= ENV['MYSQL_HOST'] %>
+  database: <%= ENV['MYSQL_DATABASE'] %>
 
 staging:
   <<: *production
