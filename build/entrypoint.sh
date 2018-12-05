@@ -6,4 +6,4 @@ if bundle exec rails db:migrate:status &> /dev/null; then
   bundle exec rails db:migrate
 fi
 
-bundle exec rails s
+bundle exec rails s -b 0.0.0.0
