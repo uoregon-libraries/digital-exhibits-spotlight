@@ -24,7 +24,7 @@ RUN rbenv install 2.3.1
 RUN rbenv rehash
 RUN rbenv global 2.3.1
 
-RUN gem install bundler --version 1.12.5
+RUN gem install bundler
 
 RUN mkdir /app
 WORKDIR /app
