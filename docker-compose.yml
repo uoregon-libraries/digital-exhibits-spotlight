@@ -52,6 +52,9 @@ services:
       - solr
       - db
     environment:
+      - MAIL_SERVER=example.org
+      - MAIL_SENDER=user@example.org
+      - MAIL_PASSWORD=userpass
       - SOLR_URL=http://solr:8983/solr/mycore
       - OD_URL=https://oregondigital.org
     command: >
