@@ -52,6 +52,7 @@ services:
     environment:
       - MAIL_SERVER=example.org
       - MAIL_SENDER=noreply@example.org
+      - URL_HOST=localhost:3000
       - SOLR_URL=http://solr:8983/solr/mycore
       - OD_URL=https://oregondigital.org
     command: >
