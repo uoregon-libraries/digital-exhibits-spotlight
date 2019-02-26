@@ -41,6 +41,7 @@ services:
       - ./config/mysql/:/etc/mysql/conf.d:Z
 
   web:
+    image: uoregon-libraries/digital-exhibits-spotlight:201902261252
     build:
       dockerfile: Dockerfile
       context: .
