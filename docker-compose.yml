@@ -17,7 +17,6 @@ services:
     image: mariadb:5.5
     ports:
       - "3306:3306"
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=ABRACADABRA
       - MYSQL_PASSWORD=ABRACADABRA
@@ -31,7 +30,6 @@ services:
     image: mariadb:5.5
     ports:
       - "3307:3306"
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=ABRACADABRA
       - MYSQL_PASSWORD=ABRACADABRA
@@ -53,6 +51,9 @@ services:
       - solr
       - db
     environment:
+      - MAIL_SERVER=example.org
+      - MAIL_SENDER=noreply@example.org
+      - URL_HOST=localhost:3000
       - SOLR_URL=http://solr:8983/solr/mycore
       - OD_URL=https://oregondigital.org
     command: >
