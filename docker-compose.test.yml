@@ -1,52 +1,60 @@
-version: '2'
+version: '3'
+
+networks:
+  external:
+  internal:
+
 services:
-  solr: 
+  solr_test: 
     image: solr:6.3.0
-    ports:
-      - "8983:8983"
+    expose:
+      - 8983
+    networks:
+      internal:
     volumes:
-      - data-solr-dev:/opt/solr/server/solr/mycores/
       - ./solr/config:/opt/solr/server/solr/configsets/data_driven_schema_configs
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
-      - mycore
+      - test
     environment: 
       - VERBOSE=yes
-  db:
+  db-test:
     image: mariadb:5.5
-    ports:
-      - "3306:3306"
+    expose:
+      - 3306
+    networks:
+      internal:
     environment:
       - MYSQL_ROOT_PASSWORD=ABRACADABRA
       - MYSQL_PASSWORD=ABRACADABRA
-      - MYSQL_DATABASE=spotlightdev
-      - MYSQL_USER=root
+      - MYSQL_DATABASE=spotlighttest
+      - MYSQL_USER=roto
     volumes:
-      - db:/var/lib/mysql
       - ./config/mysql/:/etc/mysql/conf.d:Z
 
-  web:
-    image: uoregon-libraries/digital-exhibits-spotlight:201908201610
+  test:
+    image: uoregon-libraries/digital-exhibits-spotlight:201902261252
     build:
       dockerfile: Dockerfile
       context: .
     volumes:
       - .:/app 
-    ports:
-      - "3000:3000"
-    links:
-      - solr
-      - db
+    expose:
+      - 3000
+    networks:
+      internal:
+      external:
+    depends_on:
+      - solr_test
+      - db-test
     environment:
+      - RAILS_ENV=test
       - MAIL_SERVER=example.org
       - MAIL_SENDER=noreply@example.org
       - URL_HOST=localhost:3000
-      - SOLR_URL=http://solr:8983/solr/mycore
+      - SOLR_URL=http://solr:8983/solr/test
       - OD_URL=https://oregondigital.org
     command: >
       bash -c "./build/entrypoint.sh"
 
-volumes:
-  data-solr-dev: {}
-  db: {}
