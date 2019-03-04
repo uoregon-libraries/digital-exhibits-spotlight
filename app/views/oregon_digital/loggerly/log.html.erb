@@ -1,0 +1,5 @@
+<ul>
+  <% File.open(Rails.root.join("log/loggerly.log")).each do |line| %>
+    <li><%= line %></li>
+  <% end %>
+</ul>
