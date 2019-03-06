@@ -59,10 +59,15 @@ module OregonDigital
     def get_thumb
       thumb = case in_doc['active_fedora_model_ssi']
         when 'Image' then "#{ENV['OD_URL']}/downloads/#{in_doc['id']}.jpg"
-        when 'Document' then "#{ENV['OD_URL']}/media/document_pages/#{buckets}/normal-page-1.jpg"
+        when 'Document' then document_page_path
       end
       raise UnsupportedAssetType if thumb.nil?
       thumb
+    end
+
+    def document_page_path
+      id = in_doc['id'].gsub(':', '-')
+      "#{ENV['OD_URL']}/media/document_pages/#{buckets}/#{id}/normal-page-1.jpg"
     end
 
     def parse_profile

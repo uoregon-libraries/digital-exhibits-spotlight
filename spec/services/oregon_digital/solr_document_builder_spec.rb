@@ -42,7 +42,7 @@ RSpec.describe OregonDigital::SolrDocumentBuilder do
         allow(service).to receive(:buckets).and_return('a/2')
       end
       it 'returns a thumbnail location' do
-        expect(service.send(:get_thumb)).to eq("#{od_url}/media/document_pages/a/2/normal-page-1.jpg")
+        expect(service.send(:get_thumb)).to eq("#{od_url}/media/document_pages/a/2/oregondigital-abcde1234/normal-page-1.jpg")
       end
     end
     context 'when asset is unsupported' do
