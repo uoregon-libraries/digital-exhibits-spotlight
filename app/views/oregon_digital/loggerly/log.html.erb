@@ -1,5 +1,5 @@
 <ul>
-  <% File.open(Rails.root.join("log/loggerly.log")).each do |line| %>
+  <% IO.readlines(Rails.root.join("log/loggerly.log")).last(50).each do |line| %>
     <li><%= line %></li>
   <% end %>
 </ul>
