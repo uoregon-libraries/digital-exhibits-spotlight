@@ -39,7 +39,7 @@ services:
       - ./config/mysql/:/etc/mysql/conf.d:Z
 
   web:
-    image: uoregon-libraries/digital-exhibits-spotlight:201907181619
+    image: uoregon-libraries/digital-exhibits-spotlight:201908201610
     build:
       dockerfile: Dockerfile
       context: .
