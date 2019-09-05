@@ -31,7 +31,7 @@ SirTrevor.Locales.en.blocks = $.extend(SirTrevor.Locales.en.blocks, {
     title: "Uploaded Item Row",
     description: "This widget displays uploaded items in a horizontal row. Optionally, you can add a heading and/or text to be displayed adjacent to the items.",
     caption: 'Caption',
-    alt: 'Alt text',
+    alt-text: 'Alt text',
   },
 
   featured_pages: {

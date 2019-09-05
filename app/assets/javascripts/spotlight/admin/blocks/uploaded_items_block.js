@@ -90,8 +90,8 @@ SirTrevor.Blocks.UploadedItems = (function(){
                       '<input type="text" class="form-control" id="' + this.formId('caption_' + dataId) + '" name="item[' + index + '][caption]" data-field="caption"/>',
                     '</div>',
                     '<div class="field">',
-                      '<label for="' + this.formId('alt' + dataId) + '" class="control-label col-md-3"><%= i18n.t("blocks:uploaded_items:alt") %></label>',
-                      '<input type="text" class="form-control" id="' + this.formId('alt_' + dataId) + '" name="item[' + index + '][alt]" data-field="alt"/>',
+                      '<label for="' + this.formId('alt-text' + dataId) + '" class="control-label col-md-3"><%= i18n.t("blocks:uploaded_items:alt-text") %></label>',
+                      '<input type="text" class="form-control" id="' + this.formId('alt-text_' + dataId) + '" name="item[' + index + '][alt-text]" data-field="alt-text"/>',
                     '</div>',
                   '</div>',
                   '<div class="remove pull-right">',
@@ -104,7 +104,7 @@ SirTrevor.Blocks.UploadedItems = (function(){
 
       var panel = $(_.template(markup)(this));
       panel.find('[data-field="caption"]').val(data.caption);
-      panel.find('[data-field="alt"]').val(data.alt);
+      panel.find('[data-field="alt-text"]').val(data.alt-text);
       var context = this;
 
       $('.remove a', panel).on('click', function(e) {

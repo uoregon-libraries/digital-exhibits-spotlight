@@ -5,7 +5,7 @@
         <div class="box" data-id="<%= file[:id] %>">
           <div class="contents">
             <div class="thumbnail">
-              <img src='<%= file[:url] %>' alt='<%= file[:alt] %>' />
+              <img src='<%= file[:url] %>' alt='<%= file[:alt-text] %>' />
               <% if file[:caption].present? %>
                 <div class="caption">
                   <%= file[:caption] %>
