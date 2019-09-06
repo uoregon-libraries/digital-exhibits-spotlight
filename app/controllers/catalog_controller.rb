@@ -40,6 +40,8 @@ class CatalogController < ApplicationController
     config.add_field_configuration_to_solr_request!
 
     config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
+    config.add_show_field 'spotlight_hidden_title_tesim', label: 'hidden title'
+    config.add_show_field 'spotlight_upload_title_tesim', label: 'Title'
 
     OregonDigital::Properties.propertyList.each do |property|
       fieldlabel = I18n.t property.to_s, :scope => :oregon_digital_properties, :default => labelize(property.to_s)
