@@ -4,7 +4,7 @@ class ResourcesController < ApplicationController
   before_action :build_resource
   def create
     if @resource.save_and_index
-      flash[:notice] = "Saved resource from source: #{resource_params[:url]}"
+      flash[:notice] = "Processing resource from source: #{resource_params[:url]}"
       redirect_back(fallback_location: spotlight.exhibit_resources_path(current_exhibit))
     else
       flash[:notice] = @resource.errors[:base]
