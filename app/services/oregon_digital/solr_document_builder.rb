@@ -25,7 +25,7 @@ module OregonDigital
     def out_doc_init
       { id: in_doc['id'],
         Spotlight::Engine.config.thumbnail_field => get_thumb,
-        #Spotlight::Engine.config.full_image_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
+        Spotlight::Engine.config.full_image_field => ENV['OD_URL'] + "/downloads/#{in_doc['id']}.jpg",
         oembed_url_ssm: "#{ENV['OD_URL']}/resource/#{in_doc['id']}",
         pid_ssm: in_doc['id'],
         spotlight_hidden_title_tesim: in_doc["desc_metadata__title_tesim"]
