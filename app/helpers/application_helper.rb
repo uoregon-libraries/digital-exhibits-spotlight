@@ -1,10 +1,8 @@
 module ApplicationHelper
 
-  def od_link(in_hash)
-    if in_hash[:value].first.include? "oregondigital"
-      link_to "https://oregondigital.org/catalog/#{in_hash[:value].first}", "#{ENV['OD_URL']}/catalog/#{in_hash[:value].first}"
-    else
-      nil
-    end
+  #The link_to will need to be redone when OD2 goes live
+  #Use the solr document to get at the model for creating the uri
+  def od_link(args)
+    link_to "https://oregondigital.org/catalog/#{args[:document][args[:field]].first}", "#{ENV['OD_URL']}/catalog/#{args[:document][args[:field]].first}"
   end
 end
