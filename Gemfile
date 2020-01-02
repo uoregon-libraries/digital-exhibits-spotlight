@@ -56,8 +56,8 @@ end
 #gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'tzinfo-data'
 
-gem 'blacklight', ' ~> 6.0'
-gem 'blacklight-spotlight', github: 'projectblacklight/spotlight'
+gem 'blacklight', github: 'projectblacklight/blacklight', tag: 'v6.21.0'
+gem 'blacklight-spotlight', github: 'projectblacklight/spotlight', tag: 'v2.12.0'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
@@ -67,7 +67,7 @@ gem 'jquery-rails'
 gem 'devise', '>= 4.6.0'
 gem 'devise-guests', '~> 0.6'
 gem 'friendly_id'
-gem 'riiif', '~> 1.0'
+gem 'riiif', '~> 2.0'
 gem 'sitemap_generator'
 gem 'blacklight-gallery', '>= 0.3.0'
 gem 'blacklight-oembed', '>= 0.1.0'
