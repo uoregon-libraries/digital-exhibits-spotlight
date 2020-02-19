@@ -41,11 +41,17 @@ Spotlight::Engine.config.external_resources_partials = ["oregon_digital/resource
 #   OpenStruct.new(field_name: :spotlight_upload_attribution_tesim, label: 'Attribution'),
 #   OpenStruct.new(field_name: :spotlight_upload_date_tesim, label: 'Date')
 # ]
-Spotlight::Engine.config.upload_title_field = OpenStruct.new(
+Spotlight::Engine.config.upload_fields += [
+  Spotlight::UploadFieldConfig.new(
+    field_name: :spotlight_upload_rights_tesim,
+    label: -> { 'Rights' }
+    )
+  ]
+Spotlight::Engine.config.upload_title_field = Spotlight::UploadFieldConfig.new(
   field_name: :spotlight_upload_title_tesim,
-  label: 'Title',
-  form_field_type: :text_field
+  label: -> { "Title" }
 )
+
 # Spotlight::Engine.config.uploader_storage = :file
 # Spotlight::Engine.config.allowed_upload_extensions = %w(jpg jpeg png)
 
