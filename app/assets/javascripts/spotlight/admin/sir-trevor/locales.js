@@ -57,8 +57,8 @@ SirTrevor.Locales.en.blocks = $.extend(SirTrevor.Locales.en.blocks, {
   },
 
   solr_documents: {
-    title: "Item Row",
-    description: "This widget displays exhibit items in a horizontal row. Optionally, you can add a heading and/or text to be displayed adjacent to the items.",
+    title: "Item Single/Row",
+    description: "This widget displays a single exhibit item or items in a horizontal row. Clicking on them will take user to item show pages. Optionally, you can add a heading and/or text to be displayed adjacent to the items.",
     caption: {
       placeholder: "Select...",
       primary: "Primary caption",
@@ -82,8 +82,8 @@ SirTrevor.Locales.en.blocks = $.extend(SirTrevor.Locales.en.blocks, {
   },
 
   solr_documents_embed: {
-    title: "Item Embed",
-    description: "This widget embeds exhibit items on a page. Optionally, you can add a heading and/or text to be displayed adjacent to the items.",
+    title: "Uploaded Exhibit Item Embed",
+    description: "This widget embeds a single, uploaded exhibit item on a page using the OpenSeaDragon viewer. Optionally, you can add a heading and/or text to be displayed adjacent to the items.",
   },
 
   solr_documents_features: {
