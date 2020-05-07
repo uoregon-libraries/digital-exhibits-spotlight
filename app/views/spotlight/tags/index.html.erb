@@ -1,0 +1,28 @@
+<% content_for(:sidebar) do %>
+  <%= render 'spotlight/shared/exhibit_sidebar' %>
+<% end %>
+
+<%= curation_page_title t(:".header") %>
+
+<% if @tags.empty? %>
+  <p><%= t :'.no_tags' %></p>
+<% else %>
+<table class="table table-striped tags">
+  <thead>
+    <th><%= t '.name' %></th>
+    <th><%= t '.taggings.count' %></th>
+    <%# TODO last used? %>
+    <th><%= t '.actions' %></th>
+  </thead>
+  <tbody>
+  <% @tags.each do |tag| %>
+    <tr>
+      <td><%= link_to tag.name, url_to_tag_facet(tag.name) %></td>
+      <td><%= tag.taggings.where(tagger_id:current_exhibit.id).count %></td>
+      <td><%= delete_link(tag, exhibit_tag_path(current_exhibit, tag), class: 'btn btn-danger btn-sm') %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
+
