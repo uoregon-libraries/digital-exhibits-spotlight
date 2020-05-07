@@ -15,5 +15,12 @@ body {
 .st__content-block--video iframe {
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
   display: block;
+}
+
+.visit-exhibit .btn-primary {
+  width: 200px;
+  white-space: normal;
+  word-wrap: break-word;
 }
