@@ -9,8 +9,9 @@ module OregonDigital
     load_and_authorize_resource :exhibit, class: Spotlight::Exhibit
 
     def create
-      list = IO.readlines(list_params[:file].to_io)
-      CreateResourcesFromList.perform_later(list, current_exhibit)
+      IO.readlines(list_params[:file].to_io).each do |line|
+        CreateResourceFromList.perform_later(line, current_exhibit)
+      end
       flash[:notice] = "File uploaded, items are being processed."
       redirect_back(fallback_location: spotlight.exhibit_resources_path(current_exhibit))
     end

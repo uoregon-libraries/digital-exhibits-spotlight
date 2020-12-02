@@ -12,6 +12,7 @@ module OregonDigital
           out_doc[key] = val
         end
       end
+      out_doc.merge!(add_tags) if has_tags?
       out_doc
 
       rescue NoOriginalThumbError => e
@@ -84,6 +85,14 @@ module OregonDigital
       buckets.to_s.gsub('/oregondigital', '')
       rescue StandardError => e
         raise NoOriginalThumbError, e.message
+    end
+
+    def has_tags?
+      !@resource.data[:tags].blank?
+    end
+
+    def add_tags
+      {"exhibit_#{@resource.exhibit.slug}_tags_ssim" => @resource.data[:tags] }
     end
   end
 

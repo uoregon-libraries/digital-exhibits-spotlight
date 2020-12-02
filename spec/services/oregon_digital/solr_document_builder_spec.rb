@@ -102,9 +102,13 @@ RSpec.describe OregonDigital::SolrDocumentBuilder do
 
   describe '#to_solr' do
       let(:in_doc) { JSON.parse(File.read(File.join(Rails.root, 'spec/fixtures/oregondigital-df718t91z.json')))['response']['document'] }
+      let(:data) { {:tags => ['pufferfish']} }
     context 'when in_doc is fetched' do
       before do
         allow(service).to receive(:in_doc).and_return(in_doc)
+        allow(resource).to receive(:data).and_return(data)
+        allow(resource).to receive(:exhibit).and_return(exhibit)
+        allow(exhibit).to receive(:slug).and_return('fugu')
       end
       it 'populates out_doc' do
         expect(service.send(:to_solr)).to include(:id)
@@ -114,6 +118,9 @@ RSpec.describe OregonDigital::SolrDocumentBuilder do
       end
       it 'adds metadata that is a string' do
         expect(service.send(:to_solr)).to include("desc_metadata__title_tesim")
+      end
+      it 'adds tags' do
+        expect(service.send(:to_solr)).to include("exhibit_fugu_tags_ssim")
       end
     end
     context 'when in_doc has no thumbnail' do
