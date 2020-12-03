@@ -92,7 +92,11 @@ module OregonDigital
     end
 
     def add_tags
-      {"exhibit_#{@resource.exhibit.slug}_tags_ssim" => @resource.data[:tags] }
+      {"exhibit_#{@resource.exhibit.slug}_tags_ssim" => tags }
+    end
+
+    def tags
+      @resource.data[:tags].split(',').map{ |t| t.strip }
     end
   end
 

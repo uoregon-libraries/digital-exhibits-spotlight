@@ -20,9 +20,7 @@ module OregonDigital
       return if @params[:data][:tags].blank?
 
       sc = sidecar
-      @params[:data][:tags].each do |t|
-        @resource.exhibit.tag(sc, :with => t, :on => :tags)
-      end
+      @resource.exhibit.tag(sc, :with => @params[:data][:tags], :on => :tags)
     end
 
     def resource(exhibit)
@@ -39,14 +37,10 @@ module OregonDigital
       sidecar
     end
 
-    def tags(string)
-      string.split(',').map{|s| s.strip }
-    end
-
     def oregon_digital_resource_params(string)
       parts = string.split("\t")
       params = { url: "#{ ENV['OD_URL']}/catalog/#{parts.first.strip}.json" }
-      params[:data] = parts.size > 1 ? { tags: tags(parts.last) } : nil
+      params[:data] = parts.size > 1 ? { tags: parts.last.strip } : nil
       params[:data][:solr_id] = parts.first.split(":").last.strip
       params
     end

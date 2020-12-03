@@ -102,7 +102,7 @@ RSpec.describe OregonDigital::SolrDocumentBuilder do
 
   describe '#to_solr' do
       let(:in_doc) { JSON.parse(File.read(File.join(Rails.root, 'spec/fixtures/oregondigital-df718t91z.json')))['response']['document'] }
-      let(:data) { {:tags => ['pufferfish']} }
+      let(:data) { {:tags => 'pufferfish'} }
     context 'when in_doc is fetched' do
       before do
         allow(service).to receive(:in_doc).and_return(in_doc)
