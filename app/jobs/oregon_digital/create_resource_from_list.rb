@@ -40,8 +40,8 @@ module OregonDigital
     def oregon_digital_resource_params(string)
       parts = string.split("\t")
       params = { url: "#{ ENV['OD_URL']}/catalog/#{parts.first.strip}.json" }
-      params[:data] = parts.size > 1 ? { tags: parts.last.strip } : nil
-      params[:data][:solr_id] = parts.first.split(":").last.strip
+      params[:data] = { solr_id: parts.first.split(":").last.strip }
+      params[:data][:tags] = parts.size > 1 ? parts.last.strip : nil
       params
     end
   end
