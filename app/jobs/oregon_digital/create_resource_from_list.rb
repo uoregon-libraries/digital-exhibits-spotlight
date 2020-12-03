@@ -7,33 +7,38 @@ module OregonDigital
 
     def perform(item, exhibit)
       @params = oregon_digital_resource_params(item)
-      resource = Resource.new(@params)
-      resource.exhibit = exhibit
-      if !resource.save_and_index
-        Loggerly.debug "unable to save resource #{item}"
-        return
-      end
-      add_tags(exhibit)
-      Loggerly.debug "saved resource #{item}"
+      @resource = resource(exhibit)
+      add_tags
+      @resource.reindex
+    rescue StandardError => e
+      Loggerly.debug "#{@params[:data][:solr_id]} #{e.message}"
     end
 
     private
 
-
-    def add_tags(exhibit)
+    def add_tags
       return if @params[:data][:tags].blank?
-      
+
+      sc = sidecar
       @params[:data][:tags].each do |t|
-        exhibit.tag(solr_doc(params).sidecar(exhibit), :with => t, :on => :tags)
+        @resource.exhibit.tag(sc, :with => t, :on => :tags)
       end
     end
 
-    def solr_doc
-      resource.document_model.find(id: @params[:data][:solr_id])
-    rescue StandardError => e
-      Loggerly.debug e.message
+    def resource(exhibit)
+      resource = Resource.new(@params)
+      resource.exhibit = exhibit
+      resource.save
+      resource
     end
-      
+
+    def sidecar
+      sidecar = @resource.document_model.new(id: @params[:data][:solr_id]).sidecar(@resource.exhibit)
+      sidecar.resource_id = @resource.id
+      sidecar.save
+      sidecar
+    end
+
     def tags(string)
       string.split(',').map{|s| s.strip }
     end
