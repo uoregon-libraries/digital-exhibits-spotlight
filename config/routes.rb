@@ -32,10 +32,14 @@ Rails.application.routes.draw do
     end
     resources :oregon_digital_list_uploads, controller: 'oregon_digital/list_upload',  only: [:create] do
     end
-
   end
 
   get '/loggerly', to: 'oregon_digital/loggerly#index', as: 'loggerly'
+
+  authenticate :user, ->(u) { u.superadmin? } do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
