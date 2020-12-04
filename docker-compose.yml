@@ -26,8 +26,14 @@ services:
       - db:/var/lib/mysql
       - ./config/mysql/:/etc/mysql/conf.d:Z
 
+  redis:
+    image: redis:4-alpine
+    command: redis-server
+    volumes:
+      - redis:/data
+
   web:
-    image: uoregon-libraries/digital-exhibits-spotlight:202006090614
+    image: uoregon-libraries/digital-exhibits-spotlight:202012031253
     build:
       dockerfile: Dockerfile
       context: .
@@ -44,9 +50,14 @@ services:
       - URL_HOST=localhost:3000
       - SOLR_URL=http://solr:8983/solr/mycore
       - OD_URL=https://oregondigital.org
+      - REDIS_HOST=redis
+      - REDIS_PORT='6379'
+      - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
+      - SIDEKIQ_ADMIN_SAFE_URLS='http://localhost:3000'
     command: >
       bash -c "./build/entrypoint.sh"
 
 volumes:
   data-solr-dev: {}
   db: {}
+  redis: {}
