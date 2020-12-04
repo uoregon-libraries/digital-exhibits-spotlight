@@ -19,10 +19,10 @@ RUN mkdir /usr/local/rbenv/plugins
 RUN git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build
 RUN rbenv rehash
 
-# Set to Ruby 2.3.3
-RUN rbenv install 2.3.3
+# Set to Ruby 2.6.5
+RUN rbenv install 2.6.5
 RUN rbenv rehash
-RUN rbenv global 2.3.3
+RUN rbenv global 2.6.5
 
 RUN gem install bundler
 
