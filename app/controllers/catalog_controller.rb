@@ -39,6 +39,7 @@ class CatalogController < ApplicationController
 
     config.add_field_configuration_to_solr_request!
 
+    config.add_facet_field 'desc_metadata__location_ssim', label: 'Region', limit: true, helper_method: :od_label
     config.add_facet_fields_to_solr_request!
 
     config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
