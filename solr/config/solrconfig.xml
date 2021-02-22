@@ -85,6 +85,7 @@
        <str name="facet.limit">10</str>
        <str name="facet.field">active_fedora_model_ssi</str>
        <str name="facet.field">subject_ssim</str>
+       <str name="facet.field">desc_metadata__location_ssim</str>
        
        <str name="spellcheck">true</str>
        <str name="spellcheck.dictionary">default</str>
