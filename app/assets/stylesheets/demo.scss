@@ -24,3 +24,15 @@ body {
   white-space: normal;
   word-wrap: break-word;
 }
+
+.blacklight-exhibit_tags a {
+  background: #eee;
+  padding: .2em .6em .3em;
+  font-size: 80%;
+  font-weight: 700;
+  line-height: 1;
+  box-sizing: border-box;
+  border-radius: .45em;
+  white-space: nowrap;
+  display: inline-flex;
+}
