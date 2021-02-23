@@ -96,7 +96,7 @@ module OregonDigital
     end
 
     def tags
-      @resource.data[:tags].split(',').map{ |t| t.strip }
+      @resource.data[:tags].split('|').map{ |t| t.strip }
     end
   end
 
