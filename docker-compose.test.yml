@@ -32,7 +32,12 @@ services:
       - MYSQL_USER=roto
     volumes:
       - ./config/mysql/:/etc/mysql/conf.d:Z
-
+  redis-test:
+    image: redis:4-alpine
+    command: redis-server
+    tmpfs: /data
+    networks:
+      internal:
   test:
     image: uoregon-libraries/digital-exhibits-spotlight:201902261252
     build:
@@ -48,6 +53,7 @@ services:
     depends_on:
       - solr_test
       - db-test
+      - redis-test
     environment:
       - RAILS_ENV=test
       - MAIL_SERVER=example.org
@@ -55,6 +61,10 @@ services:
       - URL_HOST=localhost:3000
       - SOLR_URL=http://solr:8983/solr/test
       - OD_URL=https://oregondigital.org
+      - REDIS_HOST=redis-test
+      - REDIS_PORT='6379'
+      - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
+      - SIDEKIQ_ADMIN_SAFE_URLS='http://localhost:3000'
     command: >
       bash -c "./build/entrypoint.sh"
 

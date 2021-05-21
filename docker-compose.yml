@@ -56,6 +56,10 @@ services:
       - SIDEKIQ_ADMIN_SAFE_URLS='http://localhost:3000'
     command: >
       bash -c "./build/entrypoint.sh"
+    depends_on:
+      - db
+      - solr
+      - redis
 
 volumes:
   data-solr-dev: {}
