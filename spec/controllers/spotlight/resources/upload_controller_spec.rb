@@ -28,17 +28,17 @@ RSpec.describe Spotlight::Resources::UploadController, type: :controller do
 
       it 'stops the upload' do
         post :create, params: { exhibit_id: exhibit, resources_upload: { url: 'wind-up-bird' } }
-        expect(flash[:error]).to eq 'You have reached the maximum number of uploaded images for this exhibit'
+        expect(flash[:error]).to eq I18n.t('upload_max_error')
       end
     end
 
     context 'when the image is too large' do
       before do
-        allow(Spotlight::FeaturedImage).to receive(:new).and_raise(CarrierWave::IntegrityError, 'File size should be less than 1 MB')
+        allow(Spotlight::FeaturedImage).to receive(:new).and_raise(CarrierWave::IntegrityError, I18n.t('errors.messages.max_size_error'))
       end
       it 'stops the upload' do
         post :create, params: { exhibit_id: exhibit, resources_upload: { url: 'wind-up-bird' } }
-        expect(flash[:error]).to eq 'File size should be less than 1 MB'
+        expect(flash[:error]).to eq I18n.t('errors.messages.max_size_error')
       end
     end
   end

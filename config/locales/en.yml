@@ -45,10 +45,11 @@ en:
       localCopyShelfLocator: 'Item Locator'
       od_repository: 'Repository'
       date: 'Date'
-  upload_max_error: 'You have reached the maximum number of uploaded images for this exhibit'
+  upload_max_error: 'Image cannot be uploaded due to cap on  number of bytes for uploaded images'
+  cap-notice: 'This exhibit contains %{size} MB out of a maximum %{max} MB for uploaded files'
   spotlight:
     resources:
       upload:
         form:
           url-field:
-            help: 'File must be less than 1 MB; valid file types: %{extensions}'
+            help: 'Each file must be less than 1 MB; valid file types: %{extensions}'
