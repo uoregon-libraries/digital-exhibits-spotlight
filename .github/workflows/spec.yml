@@ -31,6 +31,7 @@ jobs:
         MAIL_SERVER: example.org
         MAIL_SENDER: noreply@example.org
         SOLR_URL: http://solr:8983/solr/test
+        MYSQL_HOST: 127.0.0.1
 
       run: bin/setup && bin/rails db:test:prepare
     - name: Run tests
