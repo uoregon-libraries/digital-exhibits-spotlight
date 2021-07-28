@@ -1,0 +1,39 @@
+name: Specs
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db-test:
+        image: mariadb:5.5
+        ports: ['3306:3306']
+        env:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_PASSWORD: ABRACADABRA
+          MYSQL_PASSWORD: ABRACADABRA
+          MYSQL_DATABASE: spotlighttest
+          MYSQL_USER: roto
+    env:
+      RAILS_ENV: test
+      OD_URL: https://oregondigital.org
+      URL_HOST: localhost:3000
+      MAIL_SERVER: example.org
+      MAIL_SENDER: noreply@example.org
+      SOLR_URL: http://solr:8983/solr/test
+      MYSQL_HOST: 127.0.0.1
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.5
+        bundler-cache: true
+    
+    - name: Install dependencies
+      run: bin/setup && bin/rails db:test:prepare
+    - name: Run tests
+      run: bundle exec rspec spec
+
