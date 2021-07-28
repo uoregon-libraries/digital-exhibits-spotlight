@@ -8,7 +8,7 @@ jobs:
     services:
       db:
         image: mariadb:5.5
-        ports: 3306
+        ports: ['3306:3306']
         env:
           MYSQL_ROOT_PASSWORD: ABRACADABRA
           MYSQL_PASSWORD: ABRACADABRA
