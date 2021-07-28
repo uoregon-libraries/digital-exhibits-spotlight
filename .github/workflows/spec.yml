@@ -1,0 +1,21 @@
+name: Specs
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.5
+        bundler-cache: true
+    
+    - name: Install dependencies
+      run: bin/setup && bin/rails db:test:prepare
+    - name: Run tests
+      run: bundle exec rspec spec
+
