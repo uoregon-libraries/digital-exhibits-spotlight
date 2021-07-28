@@ -10,10 +10,10 @@ jobs:
         image: mariadb:5.5
         ports: ['3306:3306']
         env:
-          MYSQL_DB: db-test
+          MYSQL_HOST: 127.0.0.1
           MYSQL_ROOT_PASSWORD: ABRACADABRA
           MYSQL_PASSWORD: ABRACADABRA
-          MYYSQL_DATABASE: spotlighttest
+          MYSQL_DATABASE: spotlighttest
           MYSQL_USER: roto
     steps:
     - uses: actions/checkout@v2
