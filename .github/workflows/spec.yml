@@ -5,7 +5,15 @@ on: push
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    services:
+      db:
+        image: mariadb:5.5
+        ports: 3306
+        env:
+          MYSQL_ROOT_PASSWORD: ABRACADABRA
+          MYSQL_PASSWORD: ABRACADABRA
+          MYYSQL_DATABASE: spotlighttest
+          MYSQL_USER: roto
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
