@@ -42,6 +42,10 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 #  gem 'sqlite3'
+  gem 'factory_bot_rails'
+  gem 'rubocop'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do

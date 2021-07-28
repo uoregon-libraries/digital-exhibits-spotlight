@@ -98,4 +98,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   config.active_job.queue_adapter = ENV.fetch('ACTIVE_JOB_QUEUE_ADAPTER', 'inline').to_sym
+
+  # Maximum number of bytes allotted to uploaded images per exhibit
+  config.max_upload_total_bytes = 20000000
+
 end

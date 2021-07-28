@@ -30,21 +30,26 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-
   oregon_digital:
     resources:
       form:
-        title: "OregonDigital JSON"
-        add_item: "Ingest It"
+        title: 'OregonDigital JSON'
+        add_item: 'Ingest It'
     list_uploads:
       form:
-        title: "List of OregonDigital IDs"
-        add_item: "Upload List"
-
+        title: 'List of OregonDigital IDs'
+        add_item: 'Upload List'
     properties:
       lcsubject: 'LC Subject'
       localCollectionID: 'Local Collection ID'
       localCopyShelfLocator: 'Item Locator'
       od_repository: 'Repository'
       date: 'Date'
+  upload_max_error: 'Image cannot be uploaded due to cap on  number of bytes for uploaded images'
+  cap-notice: 'This exhibit contains %{size} MB out of a maximum %{max} MB for uploaded files'
+  spotlight:
+    resources:
+      upload:
+        form:
+          url-field:
+            help: 'Each file must be less than 1 MB; valid file types: %{extensions}'

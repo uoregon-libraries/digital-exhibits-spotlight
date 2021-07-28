@@ -39,4 +39,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Maximum number of bytes allotted to uploaded images per exhibit
+  config.max_upload_total_bytes = 10
+
 end
