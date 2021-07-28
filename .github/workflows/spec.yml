@@ -10,6 +10,7 @@ jobs:
         image: mariadb:5.5
         ports: ['3306:3306']
         env:
+          MYSQL_DB: db-test
           MYSQL_ROOT_PASSWORD: ABRACADABRA
           MYSQL_PASSWORD: ABRACADABRA
           MYYSQL_DATABASE: spotlighttest
