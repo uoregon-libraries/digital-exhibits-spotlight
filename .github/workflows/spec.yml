@@ -15,6 +15,14 @@ jobs:
         bundler-cache: true
     
     - name: Install dependencies
+      env:
+        RAILS_ENV: test
+        OD_URL: https://oregondigital.org
+        URL_HOST: localhost:3000
+        MAIL_SERVER: example.org
+        MAIL_SENDER: noreply@example.org
+        SOLR_URL: http://solr:8983/solr/test
+
       run: bin/setup && bin/rails db:test:prepare
     - name: Run tests
       run: bundle exec rspec spec
