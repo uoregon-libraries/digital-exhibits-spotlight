@@ -15,6 +15,15 @@ jobs:
           MYSQL_PASSWORD: ABRACADABRA
           MYSQL_DATABASE: spotlighttest
           MYSQL_USER: roto
+    env:
+      RAILS_ENV: test
+      OD_URL: https://oregondigital.org
+      URL_HOST: localhost:3000
+      MAIL_SERVER: example.org
+      MAIL_SENDER: noreply@example.org
+      SOLR_URL: http://solr:8983/solr/test
+      MYSQL_HOST: 127.0.0.1
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -24,15 +33,6 @@ jobs:
         bundler-cache: true
     
     - name: Install dependencies
-      env:
-        RAILS_ENV: test
-        OD_URL: https://oregondigital.org
-        URL_HOST: localhost:3000
-        MAIL_SERVER: example.org
-        MAIL_SENDER: noreply@example.org
-        SOLR_URL: http://solr:8983/solr/test
-        MYSQL_HOST: 127.0.0.1
-
       run: bin/setup && bin/rails db:test:prepare
     - name: Run tests
       run: bundle exec rspec spec
