@@ -33,7 +33,7 @@ services:
       - redis:/data
 
   web:
-    image: uoregon-libraries/digital-exhibits-spotlight:202012031253
+    image: uoregon-libraries/digital-exhibits-spotlight:202108261414
     build:
       dockerfile: Dockerfile
       context: .
