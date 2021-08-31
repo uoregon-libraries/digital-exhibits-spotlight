@@ -33,7 +33,7 @@ services:
       - redis:/data
 
   web:
-    image: uoregon-libraries/digital-exhibits-spotlight:202012031253
+    image: uoregon-libraries/digital-exhibits-spotlight:202108261414
     build:
       dockerfile: Dockerfile
       context: .
@@ -54,6 +54,7 @@ services:
       - REDIS_PORT='6379'
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
       - SIDEKIQ_ADMIN_SAFE_URLS='http://localhost:3000'
+      - MYSQL_DATABASE=spotlightdev
     command: >
       bash -c "./build/entrypoint.sh"
     depends_on:
