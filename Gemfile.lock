@@ -191,7 +191,7 @@ GEM
       ruby2_keywords
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
-    ffi (1.14.2)
+    ffi (1.15.5)
     friendly_id (5.4.1)
       activerecord (>= 4.0.0)
     github-markup (3.0.5)
@@ -209,7 +209,7 @@ GEM
       json
     iiif_manifest (1.0.1)
       activesupport (>= 4)
-    image_processing (1.12.1)
+    image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jbuilder (2.10.1)
@@ -383,8 +383,8 @@ GEM
       rubocop-ast (>= 1.1.0)
     ruby-oembed (0.14.0)
     ruby-progressbar (1.10.1)
-    ruby-vips (2.0.17)
-      ffi (~> 1.9)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     ruby2_keywords (0.0.2)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
