@@ -59,7 +59,7 @@ services:
       - MAIL_SERVER=example.org
       - MAIL_SENDER=noreply@example.org
       - URL_HOST=localhost:3000
-      - SOLR_URL=http://solr:8983/solr/test
+      - SOLR_URL=http://solr_test:8983/solr/test
       - OD_URL=https://oregondigital.org
       - REDIS_HOST=redis-test
       - REDIS_PORT='6379'
