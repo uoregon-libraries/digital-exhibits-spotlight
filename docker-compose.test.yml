@@ -39,7 +39,7 @@ services:
     networks:
       internal:
   test:
-    image: uoregon-libraries/digital-exhibits-spotlight:201902261252
+    image: uoregon-libraries/digital-exhibits-spotlight:test
     build:
       dockerfile: Dockerfile
       context: .
