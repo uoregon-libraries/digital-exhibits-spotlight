@@ -53,3 +53,12 @@ en:
         form:
           url-field:
             help: 'Each file must be less than 1 MB; valid file types: %{extensions}'
+    featured_images:
+      form:
+        blur_help: 'A slight blur filter is added by default to the masthead image in order to make the title text legible. Uncheck only if masthead image itself contains textual content that must be legible and background image layout will not interfere with the title text.'
+      upload_form:
+        blur_help: 'A slight blur filter is added by default to the masthead image in order to make the title text legible. Uncheck only if masthead image itself contains textual content that must be legible and background image layout will not interfere with the title text.'
+  activerecord:
+    attributes:
+      spotlight/masthead:
+        blur: 'Apply blur'

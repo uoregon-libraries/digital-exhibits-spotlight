@@ -1,0 +1,39 @@
+<div data-cropper="<%= f.object.model_name.singular_route_key %>" data-form-prefix="<%= form_prefix(f) %>">
+<%= field_set_tag do %>
+  <%= f.check_box(:display) %>
+  <%= f.check_box(:blur) %>
+  <span class="help-block"><%= t(:'.blur_help') %></span>
+<% end if f.object.is_a? Spotlight::Masthead %>
+<%= field_set_tag(t(:'.source.header')) do %>
+  <div>
+    <%= f.radio_button(:source, :exhibit, label: t(:'.source.exhibit.label')) %>
+    <div>
+      <%= f.hidden_field(:document_global_id) %>
+      <div class="alert alert-danger" data-behavior="non-iiif-alert" role="alert" style="display:none;">
+        <span class="glyphicon glyphicon-alert"></span>
+        <%= t(:'.non_iiif_alert_html') %>
+      </div>
+      <%= text_field_tag(:document_title, (presenter(f.object.document).document_show_html_title if f.object.document), class: "form-control", data: { input_select_target: "##{form_prefix(f)}_source_exhibit", 'behavior': 'autocomplete', featured_image_typeahead: true, target_panel: "##{form_prefix(f)}-target-panel", :'id-field' => "##{form_prefix(f)}_document_global_id" }) %>
+      <div id="<%= form_prefix(f) %>-target-panel" style="display:none">
+        <div class="panel-heading">
+          <div data-item-title="true"></div>
+          <div data-panel-image-pagination="true"></div>
+        </div>
+      </div>
+      <p class="help-block"><%= t(:'.source.exhibit.help') %></p>
+    </div>
+  </div>
+  <div>
+    <%= f.radio_button(:source, :remote, label: t(:'.source.remote.label')) %>
+    <%= iiif_upload_tag(f) %>
+    <span class="help-block">
+      <%= t(:'.source.remote.help') %>
+    </span>
+  </div>
+<% end %>
+<%= field_set_tag(t(:'.source.remote.header')) do %>
+  <p class="instructions"><%= t(:'.crop_area.help', thing: crop_type) %></p>
+  <%= iiif_cropper_tags f, initial_crop_selection: initial_crop_selection %>
+<% end %>
+</div>
+

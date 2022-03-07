@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_172440) do
     t.string "iiif_canvas_id"
     t.string "iiif_image_id"
     t.string "iiif_tilesource"
+    t.boolean "blur", default: true
   end
 
   create_table "spotlight_filters", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -20,6 +20,8 @@ module SpotlightDemo
     config.to_prepare do
       Spotlight::Resources::UploadController.prepend(UploadControllerBehavior)
       Spotlight::FeaturedImageUploader.prepend(CarrierWaveOption)
+      Spotlight::AppearancesController.prepend(FeaturedImageBehavior)
+      Spotlight::SitesController.prepend(FeaturedImageBehavior)
     end
   end
 end

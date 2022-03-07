@@ -36,3 +36,20 @@ body {
   white-space: nowrap;
   display: inline-flex;
 }
+
+@mixin masthead-background-containers() {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: block;
+  width: auto;
+  height: inherit;
+}
+
+.background-container-no-blur{
+   @include masthead-background-containers();
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+}
