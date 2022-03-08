@@ -24,7 +24,7 @@ jobs:
       URL_HOST: localhost:3000
       MAIL_SERVER: example.org
       MAIL_SENDER: noreply@example.org
-      SOLR_URL: localhost:8983/solr/test
+      SOLR_URL: http://localhost:8983/solr/test
       MYSQL_HOST: 127.0.0.1
 
     steps:
