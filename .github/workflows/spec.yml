@@ -15,6 +15,9 @@ jobs:
           MYSQL_PASSWORD: ABRACADABRA
           MYSQL_DATABASE: spotlighttest
           MYSQL_USER: roto
+      solr:
+        image: solr:6.3.0
+        ports: ['8983:8983']
     env:
       RAILS_ENV: test
       OD_URL: https://oregondigital.org
@@ -32,8 +35,13 @@ jobs:
         ruby-version: 2.6.5
         bundler-cache: true
     
-    - name: Install dependencies
+    - name: Rails setup
       run: bin/setup && bin/rails db:test:prepare
+    - name: Prep solr
+      env:
+        SOLR_ID: ${{ job.services.solr.id }}
+      run: |
+        docker exec --tty $SOLR_ID solr create_core -c test
     - name: Run tests
       run: bundle exec rspec spec
 
