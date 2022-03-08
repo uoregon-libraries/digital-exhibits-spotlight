@@ -41,7 +41,7 @@ jobs:
       env:
         SOLR_ID: ${{ job.services.solr.id }}
       run: |
-        docker exec --tty $SOLR_ID solr solr-precreate test
+        docker exec --tty $SOLR_ID solr create_core -c test
     - name: Run tests
       run: bundle exec rspec spec
 
