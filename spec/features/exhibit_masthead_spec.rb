@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 describe 'Add and update the site masthead', type: :feature do
-  let(:exhibit) { FactoryBot.create(:exhibit) }
+  let(:exhibit) { FactoryBot.create(:exhibit, title: 'My Little Pony', slug: 'my-little-pony') }
   let(:user) { FactoryBot.create(:exhibit_admin, exhibit: exhibit) }
 
   before { login_as user }
