@@ -18,6 +18,7 @@ jobs:
       solr:
         image: solr:6.3.0
         ports: ['8983:8983']
+        options: -v ${{ github.workspace }}/solr/config:/opt/solr/server/solr/configsets/data_driven_schema_configs --name solr
     env:
       RAILS_ENV: test
       OD_URL: https://oregondigital.org
@@ -41,6 +42,7 @@ jobs:
       env:
         SOLR_ID: ${{ job.services.solr.id }}
       run: |
+        docker restart solr
         docker exec --tty $SOLR_ID solr create_core -c test -d solr/config
     - name: Run tests
       run: bundle exec rspec spec
