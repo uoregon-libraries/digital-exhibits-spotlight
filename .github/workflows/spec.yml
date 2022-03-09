@@ -43,7 +43,6 @@ jobs:
       run: |
         docker cp ./solr/config $SOLR_ID:/opt/solr/server/solr/configsets/data_driven_schema_configs
         docker exec --tty $SOLR_ID precreate-core test
-        docker exec --tty $SOLR_ID solr restart
     - name: Run tests
       run: bundle exec rspec spec
 
