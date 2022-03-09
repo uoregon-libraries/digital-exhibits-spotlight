@@ -18,7 +18,6 @@ jobs:
       solr:
         image: solr:6.3.0
         ports: ['8983:8983']
-        options: -v ${{ github.workspace }}/solr/config:/opt/solr/server/solr/configsets/data_driven_schema_configs --name solr
     env:
       RAILS_ENV: test
       OD_URL: https://oregondigital.org
@@ -39,11 +38,11 @@ jobs:
     - name: Rails setup
       run: bin/setup && bin/rails db:test:prepare
     - name: Prep solr
-      env:
-        SOLR_ID: ${{ job.services.solr.id }}
       run: |
-        docker restart solr
-        docker exec --tty $SOLR_ID solr create_core -c test -d solr/config
+        cd ./solr/config
+        zip -1 -r solr_hyrax_config.zip ./*
+        curl -H "Content-type:application/octet-stream" --data-binary @solr_hyrax_config.zip "http://localhost:8983/solr/admin/configs?action=UPLOAD&name=spotlight"
+        curl -H 'Content-type: application/json' http://localhost:8985/api/collections/ -d '{create: {name: test, config: spotlight, numShards: 1}}'
     - name: Run tests
       run: bundle exec rspec spec
 
