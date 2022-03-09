@@ -17,7 +17,7 @@ jobs:
           MYSQL_USER: roto
       solr:
         image: solr:6.3.0
-        ports: ['8984:8983']
+        ports: ['8983:8983']
     env:
       RAILS_ENV: test
       OD_URL: https://oregondigital.org
@@ -42,7 +42,7 @@ jobs:
         SOLR_ID: ${{ job.services.solr.id }}
       run: |
         docker cp ./solr/config $SOLR_ID:/opt/solr/server/solr/configsets/data_driven_schema_configs
-        docker exec --tty $SOLR_ID solr-precreate test
+        docker exec --tty $SOLR_ID precreate_core test && solr restart
     - name: Run tests
       run: bundle exec rspec spec
 
