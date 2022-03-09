@@ -42,7 +42,7 @@ jobs:
         SOLR_ID: ${{ job.services.solr.id }}
       run: |
         docker cp ./solr/config $SOLR_ID:/opt/solr/server/solr/configsets/data_driven_schema_configs
-        docker exec -tty $SOLR_ID solr create_core -c test
+        docker exec --tty $SOLR_ID solr create_core -c test
     - name: Run tests
       run: bundle exec rspec spec
 
