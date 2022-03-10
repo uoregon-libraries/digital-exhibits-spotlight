@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 describe 'Add and update the site masthead', type: :feature do
-  let(:exhibit) { FactoryBot.create(:exhibit, title: 'My Little Pony', slug: 'my-little-pony') }
+  let(:exhibit) { FactoryBot.create(:exhibit) }
   let(:user) { FactoryBot.create(:exhibit_admin, exhibit: exhibit) }
 
   before { login_as user }
@@ -20,9 +20,6 @@ describe 'Add and update the site masthead', type: :feature do
     within '#site-masthead' do
       check 'Show background image in masthead'
       uncheck 'Apply blur'
-
-      # attach_file('exhibit_masthead_attributes_image', File.absolute_path(File.join(FIXTURES_PATH, 'avatar.png')))
-      # The JS fills in these fields:
       find('#exhibit_masthead_attributes_iiif_tilesource', visible: false).set 'http://test.host/images/7'
       find('#exhibit_masthead_attributes_iiif_region', visible: false).set '0,0,100,200'
     end
