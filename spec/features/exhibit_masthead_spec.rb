@@ -2,20 +2,24 @@
 require 'rails_helper'
 
 describe 'Add and update the site masthead', type: :feature do
-  let(:exhibit) { FactoryBot.create(:exhibit) }
-  let(:user) { FactoryBot.create(:exhibit_admin, exhibit: exhibit) }
+  let(:user) { FactoryBot.create(:site_admin, exhibit: exhibit) }
 
   before { login_as user }
 
-  it 'displays a masthead image when one is uploaded and configured' do
-    expect(exhibit.solr_data).to_not eq({})
-    visit spotlight.exhibit_dashboard_path(exhibit)
-    expect(page).to_not have_css('.image-masthead')
+  it 'displays a masthead image for an exhibit when one is configured' do
+    visit '/'
+    within '.dropdown-menu' do
+      click_link 'Create new exhibit'
+    end
+
+    fill_in 'Title', with: 'My exhibit title'
+    click_button 'Save'
+
     within '#sidebar' do
       click_link 'Appearance'
     end
 
-    click_link 'Exhibit masthead'
+    #click_link 'Exhibit masthead'
 
     within '#site-masthead' do
       check 'Show background image in masthead'
