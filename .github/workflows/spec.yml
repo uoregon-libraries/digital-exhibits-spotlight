@@ -17,7 +17,7 @@ jobs:
           MYSQL_USER: roto
       solr:
         image: solr:6.3.0
-        ports: ['8983:8983']
+        ports: ['8984:8983']
     env:
       RAILS_ENV: test
       OD_URL: https://oregondigital.org
