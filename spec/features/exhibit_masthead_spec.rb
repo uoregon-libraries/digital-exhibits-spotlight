@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 describe 'Add and update the site masthead', type: :feature do
@@ -11,15 +12,12 @@ describe 'Add and update the site masthead', type: :feature do
     within '.dropdown-menu' do
       click_link 'Create new exhibit'
     end
-
     fill_in 'Title', with: 'My exhibit title'
     click_button 'Save'
 
     within '#sidebar' do
       click_link 'Appearance'
     end
-
-    #click_link 'Exhibit masthead'
 
     within '#site-masthead' do
       check 'Show background image in masthead'
