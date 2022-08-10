@@ -101,6 +101,6 @@ Rails.application.configure do
   config.active_job.queue_adapter = ENV.fetch('ACTIVE_JOB_QUEUE_ADAPTER', 'inline').to_sym
 
   # Maximum number of bytes allotted to uploaded images per exhibit
-  config.max_upload_total_bytes = 20000000
+  config.max_upload_total_bytes = 30000000
 
 end
