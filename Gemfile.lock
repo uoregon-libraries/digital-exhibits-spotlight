@@ -178,7 +178,7 @@ GEM
       actionmailer (>= 4.1.0)
       devise (>= 4.0.0)
     diff-lcs (1.4.4)
-    diffy (3.4.0)
+    diffy (3.4.2)
     erubi (1.10.0)
     execjs (2.7.0)
     factory_bot (6.2.0)
