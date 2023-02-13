@@ -27,14 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :exhibits, only: [] do
-    resources :oregon_digital_resources, controller: 'oregon_digital/resources',  only: [:create, :update] do
-    end
-    resources :oregon_digital_list_uploads, controller: 'oregon_digital/list_upload',  only: [:create] do
-    end
-  end
 
-  get '/loggerly', to: 'oregon_digital/loggerly#index', as: 'loggerly'
 
   authenticate :user, ->(u) { u.superadmin? } do
     require 'sidekiq/web'
