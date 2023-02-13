@@ -13,7 +13,7 @@ RSpec.describe Spotlight::Resources::UploadController, type: :controller do
 
     before do
       allow_any_instance_of(Spotlight::Resource).to receive(:reindex).and_return(true)
-      allow_any_instance_of(Spotlight::Resource).to receive(:blacklight_solr).and_return blacklight_solr
+#      allow_any_instance_of(Spotlight::Resource).to receive(:blacklight_solr).and_return blacklight_solr
     end
 
     it 'uploads an item' do
