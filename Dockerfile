@@ -20,9 +20,9 @@ RUN git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plu
 RUN rbenv rehash
 
 # Set to Ruby 2.6.5
-RUN rbenv install 2.6.5
+RUN rbenv install 2.7.5
 RUN rbenv rehash
-RUN rbenv global 2.6.5
+RUN rbenv global 2.7.5
 
 RUN gem install bundler
 
