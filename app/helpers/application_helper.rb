@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  include SpotlightHelper
   #The link_to will need to be redone when OD2 goes live
   #Use the solr document to get at the model for creating the uri
   def od_link(args)
@@ -19,5 +19,16 @@ module ApplicationHelper
         new_label.first.strip
       end
     end
+  end
+
+#this appears to be called with view list
+  def document_thumbnail(document, image_options = {})
+    return unless !current_exhibit.nil?
+
+    values = document.fetch(:thumbnail_url_ssm, nil)
+    return if values.empty?
+
+    url = values.first
+    image_tag url, image_options if url.present?
   end
 end

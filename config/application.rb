@@ -13,9 +13,22 @@ module SpotlightDemo
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
+    #fix for Psych::DisallowedClassError
+    config.active_record.yaml_column_permitted_classes = [
+      ActiveSupport::HashWithIndifferentAccess,
+      ActiveSupport::TimeWithZone,
+      ActiveSupport::TimeZone,
+      Date,
+      Symbol,
+      Time
+    ]
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.action_dispatch.default_headers = {
+      'Referrer-Policy' => 'strict-origin-when-cross-origin',
+      'X-Content-Type-Options' => 'nosniff'
+    }
 
     config.to_prepare do
       Spotlight::Resources::UploadController.prepend(UploadControllerBehavior)

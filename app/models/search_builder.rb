@@ -2,8 +2,8 @@
 class SearchBuilder < Blacklight::SearchBuilder
   include Blacklight::Solr::SearchBuilderBehavior
 
-  include Spotlight::AccessControlsEnforcementSearchBuilder
-
+#  include Spotlight::AccessControlsEnforcementSearchBuilder
+  include Spotlight::SearchBuilder
   ##
   # @example Adding a new step to the processor chain
   #   self.default_processor_chain += [:add_custom_data_to_query]

@@ -14,7 +14,15 @@
 //= require turbolinks
 //
 // Required by Blacklight
-//= require jquery
+//= require jquery3
 //= require blacklight/blacklight
 
+// Added for upgrade of bootstrap
+//= require popper
+//= require bootstrap
+
+
+//= require blacklight_gallery
+//= require blacklight_oembed
+//= twitter/typeahead
 //= require_tree .

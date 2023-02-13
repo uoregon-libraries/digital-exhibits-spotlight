@@ -22,4 +22,13 @@ class SolrDocument
   # and Blacklight::Document::SemanticFields#to_semantic_values
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
+
+  def title
+    if self['readonly_title_tesim'].present?
+      return self['readonly_title_tesim'].first
+    elsif self['spotlight_upload_title_tesim'].present?
+      return self['spotlight_upload_title_tesim'].first
+    end
+    return self['id']
+  end
 end

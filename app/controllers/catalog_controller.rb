@@ -12,10 +12,12 @@ class CatalogController < ApplicationController
           config.show.oembed_field = :oembed_url_ssm
           config.show.partials.insert(1, :oembed)
 
-    config.view.gallery.partials = [:index_header, :index]
-    config.view.masonry.partials = [:index]
-    config.view.slideshow.partials = [:index]
-
+#    config.view.gallery.partials = [:index_header, :index]
+#    config.view.masonry.partials = [:index]
+#    config.view.slideshow.partials = [:index]
+    config.view.gallery(document_component: Blacklight::Gallery::DocumentComponent)
+    config.view.masonry(document_component: Blacklight::Gallery::DocumentComponent)
+    config.view.slideshow(document_component: Blacklight::Gallery::SlideshowComponent)
 
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
@@ -30,26 +32,30 @@ class CatalogController < ApplicationController
     config.document_unique_id_param = 'ids'
 
     # solr field configuration for search results/index views
-    config.index.title_field = 'full_title_tesim'
-    config.thumbnail_image_url = :oembed_url_ssm
+    config.index.title_field = ::Blacklight::Configuration::Field.new(field:'title_display', accessor: :title)
+
     config.add_search_field 'all_fields', label: 'Everything'
 
     config.add_sort_field 'relevance', sort: 'score desc', label: 'Relevance'
     config.add_index_field 'desc_metadata__set_label_ssim', label: 'Set'
-
     config.add_field_configuration_to_solr_request!
 
-    config.add_facet_field 'desc_metadata__location_ssim', label: 'Region', limit: true, helper_method: :od_label
+    #FIX ANGLE BRACKETS ON LOCATIONS
+    #config.add_facet_field 'readonly_location_tesim', label: 'Region', limit: true, helper_method: :od_label
     config.add_facet_fields_to_solr_request!
 
-    config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
-    config.add_show_field 'spotlight_hidden_title_tesim', label: 'hidden title'
-    config.add_show_field 'spotlight_upload_title_tesim', label: 'Title'
 
-    OregonDigital::Properties.propertyList.each do |property|
-      fieldlabel = I18n.t property.to_s, :scope => :oregon_digital_properties, :default => labelize(property.to_s)
-      config.add_show_field "desc_metadata__#{property.to_s}_ssm", label: fieldlabel
-    end
+    config.show.title_field = ::Blacklight::Configuration::Field.new(field:'title_display', accessor: :title)
+    config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
+
+    config.add_results_collection_tool(:sort_widget)
+    config.add_results_collection_tool(:per_page_widget)
+    config.add_results_collection_tool(:view_type_group)
+
+    config.index.thumbnail_method = :document_thumbnail
+    config.index.thumbnail_field = :thumbnail_url_ssm
+    config.view.list.thumbnail_field = :thumbnail_url_ssm
+    config.show.thumbnail_field = :thumbnail_url_ssm
 
     # Set which views by default only have the title displayed, e.g.,
     # config.view.gallery.title_only_by_default = true

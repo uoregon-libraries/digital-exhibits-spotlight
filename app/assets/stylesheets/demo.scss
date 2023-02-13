@@ -5,7 +5,12 @@ body {
 #main-container {
   min-height: 300px;
 }
+.topbar {
+  background-color: rgb(34, 34, 34) !important;
+  border-color: rgb(9, 9, 9);
+}
 .navbar-brand {
+  background: transparent image-url('uolib-logo.png') no-repeat center left;
   width: 250px !important;
   height: 55px !important;
   background-size: 250px 35px !important;
@@ -39,4 +44,8 @@ body {
 
 .thumbnail a > img, .thumbnail > img{
   max-height: 300px !important;
+}
+
+.navbar-right{
+  float: right;
 }

@@ -47,9 +47,11 @@ Spotlight::Engine.config.upload_fields += [
     )
   ]
 Spotlight::Engine.config.upload_title_field = Spotlight::UploadFieldConfig.new(
-  field_name: :spotlight_upload_title_tesim,
+  field_name: 'full_title_tesim',
   label: -> { "Title" }
 )
+
+Spotlight::Engine.config.iiif_title_fields = 'title_display'
 
 # Spotlight::Engine.config.uploader_storage = :file
 # Spotlight::Engine.config.allowed_upload_extensions = %w(jpg jpeg png)
