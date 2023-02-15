@@ -32,7 +32,7 @@ class CatalogController < ApplicationController
     config.document_unique_id_param = 'ids'
 
     # solr field configuration for search results/index views
-    config.index.title_field = ::Blacklight::Configuration::Field.new(field:'title_display', accessor: :title)
+    config.index.title_field = ::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title)
 
     config.add_search_field 'all_fields', label: 'Everything'
 
@@ -45,7 +45,7 @@ class CatalogController < ApplicationController
     config.add_facet_fields_to_solr_request!
 
 
-    config.show.title_field = ::Blacklight::Configuration::Field.new(field:'title_display', accessor: :title)
+    config.show.title_field = ::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title)
     config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
 
     config.add_results_collection_tool(:sort_widget)

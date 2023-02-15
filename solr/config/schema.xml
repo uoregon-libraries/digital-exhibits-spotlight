@@ -14,7 +14,6 @@
     <field name="lat" type="tdouble" stored="true" indexed="true" multiValued="false"/>
     <field name="lng" type="tdouble" stored="true" indexed="true" multiValued="false"/>
     <field name="original_pid_tesim" type="pid_text" stored="true" indexed="true" multiValued="true"/>
-
     <field name="full_title_ng" type="text_en_ng" stored="false" indexed="true" multiValued="true"/>
     <field name="id_ng"         type="text_en_ng" stored="false" indexed="true" multiValued="false"/>
 
@@ -205,15 +204,13 @@
 
   <copyField source="id" dest="id_ng" maxChars="3000"/>
 
-  <!-- for oregondigital assets -->
-  <copyField source="desc_metadata__title_tesim" dest="full_title_tesim" maxChars="3000"/>
-  <copyField source="desc_metadata__title_tesim" dest="full_title_ng" maxChars="3000" />
 
 
   <!--for uploaded assets -->
   <copyField source="spotlight_upload_title_tesim" dest="full_title_ng" maxChars="3000"/>
   <copyField source="spotlight_upload_title_tesim" dest="full_title_tesim" maxChars="3000"/>
 
+  <copyField source="full_title_tesim" dest="full_title_ng" maxChars="3000"/>
 
   <copyField source="*_tesim" dest="all_text_timv" maxChars="3000"/>
 
