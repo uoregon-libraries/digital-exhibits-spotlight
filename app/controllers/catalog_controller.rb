@@ -8,6 +8,16 @@ class CatalogController < ApplicationController
     label_arr.join(" ")
   end
 
+  before_action only: :admin do
+    unless blacklight_config.view.key? :admin_table
+      blacklight_config.view.admin_table(
+        thumbnail_field: :thumbnail_url_ssm,
+        partials: [:index_compact],
+        document_actions: []
+      )
+    end
+  end
+
   configure_blacklight do |config|
           config.show.oembed_field = :oembed_url_ssm
           config.show.partials.insert(1, :oembed)
