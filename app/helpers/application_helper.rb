@@ -26,7 +26,7 @@ module ApplicationHelper
     return unless !current_exhibit.nil?
 
     values = document.fetch(:thumbnail_url_ssm, nil)
-    return if values.empty?
+    return if values.blank?
 
     url = values.first
     image_tag url, image_options if url.present?
