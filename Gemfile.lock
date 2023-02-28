@@ -306,6 +306,7 @@ GEM
       rails (>= 4.2.0)
     legato (0.7.0)
       multi_json
+    libv8-node (16.10.0.0-x86_64-linux)
     libv8-node (16.10.0.0-x86_64-linux-musl)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -570,6 +571,7 @@ GEM
     zeitwerk (2.6.7)
 
 PLATFORMS
+  x86_64-linux
   x86_64-linux-musl
 
 DEPENDENCIES
