@@ -4,7 +4,7 @@ require 'rails_helper'
 # unclear why at present but rails couldn't find the admin thumbnail template
 RSpec.describe "spotlight/catalog/_index_compact_default", type: :view do
   let(:exhibit) { FactoryBot.create(:exhibit) }
-  let(:document) { SolrDocument.new(id: 'abcde1234', full_title_tesim: 'Red', thumbnail_url_ssm: ['http://iiif.blah.org/iiif/red-img.png']) }
+  let(:document) { SolrDocument.new(id: 'abcde1234', readonly_title_tesim: 'Red', thumbnail_url_ssm: ['http://iiif.blah.org/iiif/red-img.png']) }
   let(:blacklight_config) { CatalogController.blacklight_config }
   
   before do
@@ -22,6 +22,10 @@ RSpec.describe "spotlight/catalog/_index_compact_default", type: :view do
   it "includes thumbnails" do
     render(partial: "spotlight/catalog/index_compact_default", locals: { document: document, document_counter: 0 })
     expect(rendered).to have_selector(".spotlight-admin-thumbnail")
+  end
+  it 'uses the correct title' do
+    render(partial: "spotlight/catalog/index_compact_default", locals: { document: document, document_counter: 0 })
+    expect(rendered).to have_selector(".index_title:nth-child(1)", text: 'Red')
   end
 end
 
