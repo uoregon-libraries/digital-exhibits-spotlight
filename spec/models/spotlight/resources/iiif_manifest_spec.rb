@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Spotlight::Resources::IiifManifest do
-  let(:url) { 'uri://to-manifest' }
+  let(:url) { 'https://oregondigital.org/iiif_manifest_v2/abcde1234' }
   subject { described_class.new(url: url, manifest: manifest, collection: collection) }
   let(:collection) { double(compound_id: '1') }
   let(:manifest_fixture) { test_manifest1 }

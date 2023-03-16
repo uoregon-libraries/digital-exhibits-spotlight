@@ -4,7 +4,7 @@ module IiifResponses
 
   def test_manifest1
     {
-      "@id": 'uri://for-manifest1',
+      "@id": 'https://oregondigital.org/iiif_manifest_v2/abcde1234',
       "@type": 'sc:Manifest',
       label: 'Test Manifest 1',
       attribution: 'Attribution Data',
