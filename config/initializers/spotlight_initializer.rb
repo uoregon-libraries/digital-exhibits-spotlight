@@ -15,6 +15,7 @@
 #   'spotlight/resources/csv_upload/form',
 #   'spotlight/resources/json_upload/form'
 # ]
+Spotlight::Engine.config.iiif_upload_partials = ['spotlight/resources/iiif/iiif_single_upload/form', 'spotlight/resources/iiif/iiif_list_upload/form']
 # Spotlight::Engine.config.default_browse_index_view_type = :gallery
 # Spotlight::Engine.config.default_contact_email = nil
 

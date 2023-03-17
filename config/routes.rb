@@ -27,7 +27,10 @@ Rails.application.routes.draw do
     end
   end
 
-
+  resources :exhibits, only: [] do
+    resources :resources_iiif_list_uploads, controller: 'spotlight/resources/iiif_list_upload', only: [:create] do
+    end
+  end
 
   authenticate :user, ->(u) { u.superadmin? } do
     require 'sidekiq/web'
