@@ -3,10 +3,10 @@ require 'iiif/presentation'
 # Subclass of Spotlight::Resources::IiifHarvester that adds the resource_url field
 module Spotlight
     module Resources
-        class IiifHarvesterResourceUrl < Spotlight::Resources::IiifHarvester
+        class IiifHarvesterMetadata < Spotlight::Resources::IiifHarvester
             def iiif_manifests
                 resource_url = oregon_digital_url(url)
-                @iiif_manifests ||= IiifServiceResourceUrl.parse(url, resource_url)
+                @iiif_manifests ||= IiifServiceMetadata.parse(url, resource_url)
             end
 
             private

@@ -1,7 +1,7 @@
 # Subclass of Spotlight::Resources::IiifManifest that adds the resource_url field
 module Spotlight
     module Resources
-        class IiifManifestResourceUrl < Spotlight::Resources::IiifManifest
+        class IiifManifestMetadata < Spotlight::Resources::IiifManifest
             def initialize(attrs = {})
                 @resource_url = attrs[:resource_url]
                 super
