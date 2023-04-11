@@ -7,8 +7,6 @@ module Spotlight
         @params = iiif_resource_params(item)
         @iiif_resource = iiif_resource(exhibit, item)
         @iiif_resource.reindex
-      rescue StandardError => e
-        Loggerly.debug "#{@params} #{e.message}"
       end
 
       private
