@@ -38,3 +38,17 @@ en:
         form:
           url-field:
             help: 'Each file must be less than 1 MB; valid file types: %{extensions}'
+
+  spotlight:
+    resources:
+      iiif:
+        iiif_single_upload:
+          form:
+            title: "IIIF URL"
+            add_item: "Add IIIF Items"
+            url-field:
+              help: "Add the URL of a IIIF manifest or collection."
+        iiif_list_upload: 
+          form:
+            title: "List of IIIF URLs"
+            add_item: "Upload List"
