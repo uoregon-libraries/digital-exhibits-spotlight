@@ -51,8 +51,8 @@ class CatalogController < ApplicationController
     config.add_sort_field 'relevance', sort: 'score desc', label: 'Relevance'
     config.add_field_configuration_to_solr_request!
 
-    config.add_facet_field 'readonly_location_tesim', label: 'Region', limit: true
-    config.add_facet_field 'readonly_subject_tesim', label: 'Topics', limit: true
+    config.add_facet_field 'readonly_location_ssim', label: 'Region', limit: true
+    config.add_facet_field 'readonly_subject_ssim', label: 'Topics', limit: true
     config.add_facet_fields_to_solr_request!
 
     # copying dpul here, not wrapping it like this breaks the typeahead in the widgets.
