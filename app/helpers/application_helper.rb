@@ -7,10 +7,10 @@ module ApplicationHelper
   end
 
   def iiif_link(args)
-    if args[:document][args[:field]].include? "Unavailable"
-      args[:document][args[:field]]
-    else
+    if args[:document][args[:field]].include? "oregondigital.org"
       link_to "#{args[:document][args[:field]]}", "#{args[:document][args[:field]]}"
+    else
+      args[:document][args[:field]]
     end
   end
 

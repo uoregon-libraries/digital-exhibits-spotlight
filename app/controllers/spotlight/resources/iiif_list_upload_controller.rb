@@ -12,7 +12,7 @@ module Spotlight
           CreateIiifResourceFromList.perform_later(line, current_exhibit)
         end
         flash[:notice] = "File uploaded, items are being processed."
-        redirect_back(fallback_location: spotlight.exhibit_resources_path(current_exhibit))
+        redirect_to spotlight.admin_exhibit_catalog_path(current_exhibit, sort: :timestamp)
       end
 
       private

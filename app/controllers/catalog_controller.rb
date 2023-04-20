@@ -57,7 +57,7 @@ class CatalogController < ApplicationController
 
     config.show.title_field = ::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title)
     config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
-    config.add_show_field 'resource_url_ssi', label: 'See Original Resource', helper_method: :iiif_link
+    config.add_show_field 'resource_url_ssi', label: 'See it at Oregon Digital', helper_method: :iiif_link
 
     config.add_results_collection_tool(:sort_widget)
     config.add_results_collection_tool(:per_page_widget)

@@ -12,7 +12,7 @@ module Spotlight
             private
             
             def oregon_digital_url(url)
-                unavailable = "Unavailable from Oregon Digital"
+                unavailable = "N/A"
                 return unavailable unless url.include? "oregondigital"
 
                 return "https://oregondigital.org/concern/images/#{url.split("/").last}"
