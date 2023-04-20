@@ -26,7 +26,7 @@ RSpec.describe Spotlight::Resources::IiifListUploadController, type: :controller
         it 'redirects back' do
             expect(Spotlight::Resources::CreateIiifResourceFromList).to receive(:perform_later).and_return(nil).exactly(3).times
             post :create, params: { exhibit_id: exhibit, resources_iiif_list_upload: {file: file}}
-            expect(response).to redirect_to "http://test.host/spotlight/#{exhibit.slug}/resources"
+            expect(response).to redirect_to "http://test.host/spotlight/#{exhibit.slug}/catalog/admin?sort=timestamp"
         end
     end
 end
