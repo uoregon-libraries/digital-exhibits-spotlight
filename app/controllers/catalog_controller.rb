@@ -55,6 +55,10 @@ class CatalogController < ApplicationController
     config.add_facet_field 'readonly_subject_ssim', label: 'Topics', limit: true
     config.add_facet_fields_to_solr_request!
 
+    config.show.title_field = ::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title)
+    config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
+    config.add_show_field 'resource_url_ssi', label: 'See it at Oregon Digital', helper_method: :iiif_link
+
     # copying dpul here, not wrapping it like this breaks the typeahead in the widgets.
     config.show.title_field = FieldStringifier.new(::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title))
 

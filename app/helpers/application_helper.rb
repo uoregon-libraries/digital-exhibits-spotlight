@@ -6,6 +6,14 @@ module ApplicationHelper
     link_to "https://oregondigital.org/catalog/#{args[:document][args[:field]].first}", "#{ENV['OD_URL']}/catalog/#{args[:document][args[:field]].first}"
   end
 
+  def iiif_link(args)
+    if args[:document][args[:field]].include? "oregondigital.org"
+      link_to "#{args[:document][args[:field]]}", "#{args[:document][args[:field]]}"
+    else
+      args[:document][args[:field]]
+    end
+  end
+
   def od_label(args)
     return extract_label(args).find{|x| !x.blank?}.to_s
   end

@@ -12,7 +12,7 @@ module Spotlight
       private
 
       def iiif_resource(exhibit, string)
-        iiif_resource = Spotlight::Resources::IiifHarvester.create(exhibit_id: exhibit.id, url: string.strip)
+        iiif_resource = Spotlight::Resources::IiifHarvesterMetadata.create(exhibit_id: exhibit.id, url: string.strip)
         iiif_resource.save
         iiif_resource
       end

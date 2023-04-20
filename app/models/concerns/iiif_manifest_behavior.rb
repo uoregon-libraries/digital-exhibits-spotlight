@@ -1,5 +1,10 @@
 module IiifManifestBehavior
   extend ActiveSupport::Concern
+  
+  def add_resource_url
+    solr_hash['resource_url_ssi'] = resource_url
+  end
+    
   # Copying dpul BothFields fix
   def manifest_metadata
 
@@ -20,4 +25,3 @@ module IiifManifestBehavior
       end
   end
 end
-
