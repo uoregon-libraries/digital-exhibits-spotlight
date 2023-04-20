@@ -42,22 +42,25 @@ class CatalogController < ApplicationController
     config.document_unique_id_param = 'ids'
 
     # solr field configuration for search results/index views
-    config.index.title_field = ::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title)
+    #title
+    config.index.title_field = 'full_title_tesim'
+    config.index.display_title_field = 'full_title_tesim'
 
     config.add_search_field 'all_fields', label: 'Everything'
 
     config.add_sort_field 'relevance', sort: 'score desc', label: 'Relevance'
-    config.add_index_field 'desc_metadata__set_label_ssim', label: 'Set'
     config.add_field_configuration_to_solr_request!
 
-    #FIX ANGLE BRACKETS ON LOCATIONS
-    #config.add_facet_field 'readonly_location_tesim', label: 'Region', limit: true, helper_method: :od_label
+    config.add_facet_field 'readonly_location_ssim', label: 'Region', limit: true
+    config.add_facet_field 'readonly_subject_ssim', label: 'Topics', limit: true
     config.add_facet_fields_to_solr_request!
-
 
     config.show.title_field = ::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title)
     config.add_show_field 'pid_ssm', label: 'See it at Oregon Digital', helper_method: :od_link
     config.add_show_field 'resource_url_ssi', label: 'See it at Oregon Digital', helper_method: :iiif_link
+
+    # copying dpul here, not wrapping it like this breaks the typeahead in the widgets.
+    config.show.title_field = FieldStringifier.new(::Blacklight::Configuration::Field.new(field:'full_title_tesim', accessor: :title))
 
     config.add_results_collection_tool(:sort_widget)
     config.add_results_collection_tool(:per_page_widget)

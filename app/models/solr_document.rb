@@ -23,11 +23,12 @@ class SolrDocument
   # Recommendation: Use field names from Dublin Core
   use_extension(Blacklight::Document::DublinCore)
 
+  # this is referenced in the catalog_controller
   def title
     if self['readonly_title_tesim'].present?
-      return self['readonly_title_tesim'].first
+      return self['readonly_title_tesim']
     elsif self['spotlight_upload_title_tesim'].present?
-      return self['spotlight_upload_title_tesim'].first
+      return self['spotlight_upload_title_tesim']
     end
     return self['id']
   end
