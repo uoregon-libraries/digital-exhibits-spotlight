@@ -2,3 +2,5 @@ log/*
 .git
 *.sql
 snapshot.*
+public
+mysql
