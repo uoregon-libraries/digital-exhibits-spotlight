@@ -17,4 +17,10 @@ class User < ApplicationRecord
   def to_s
     email
   end
+
+  #Only accept existing user accounts
+  def self.from_omniauth(access_token)
+    email = "#{access_token.uid}@uoregon.edu"
+    User.where(email: email).first
+  end
 end
