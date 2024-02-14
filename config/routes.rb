@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     concerns :searchable
   end
 
-  devise_for :users
+  # Using OmniAuth without other authentications
+  devise_for :users, :controllers => { :omniauth_callbacks => 'users/omniauth_callbacks' }
+
   concern :exportable, Blacklight::Routes::Exportable.new
 
   resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do

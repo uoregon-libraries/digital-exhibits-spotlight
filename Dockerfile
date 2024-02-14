@@ -4,7 +4,7 @@ FROM ruby:2.7-alpine3.15
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
-RUN gem install bundler
+RUN gem install bundler -v 2.4.22
 
 RUN apk add --update --no-cache \
       bash \

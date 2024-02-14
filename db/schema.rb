@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_18_160918) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_28_210550) do
   create_table "bookmarks", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "user_type"
@@ -443,6 +443,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_18_160918) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
