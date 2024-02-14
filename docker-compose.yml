@@ -55,9 +55,6 @@ services:
       - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
       - SIDEKIQ_ADMIN_SAFE_URLS='http://localhost:3000'
       - MYSQL_DATABASE=spotlightdev
-      - SAML_IDP_CERT=cert
-      - SAML_URL=saml_url
-      - SAML_ENTITY_ID=saml_entity_id
     command: >
       bash -c "./build/entrypoint.sh"
     depends_on:
