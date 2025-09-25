@@ -19,6 +19,10 @@ RUN apk add --update --no-cache \
 
 RUN mkdir -p /app
 WORKDIR /app
-ADD . /app
 
+# Get the gem metadata, pull the gems, and *then* add the rest of the app. This
+# avoids requiring a five-minute bundle build every time the app changes.
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install 
+ADD . /app
