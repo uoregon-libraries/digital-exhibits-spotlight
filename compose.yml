@@ -48,12 +48,19 @@ services:
       MYSQL_PASSWORD: spotlight
       MYSQL_DATABASE: spotlight
       MYSQL_USER: spotlight
-    command: >
-      bash -c "./build/entrypoint.sh"
+    command: rails s -b 0.0.0.0
     depends_on:
       - db
       - solr
       - redis
+      - sidekiq
+
+  sidekiq:
+    extends: web
+    command: sidekiq -C ./config/sidekiq.yml
+    depends_on: !override
+      - db
+      - solr
 
 volumes:
   data-solr-dev: {}

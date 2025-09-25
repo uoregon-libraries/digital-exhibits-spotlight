@@ -1,10 +1,36 @@
 #!/bin/sh
 
-rm -f tmp/pids/server.pid
+# wait_for_database actually waits for migrations to succeed, since that's
+# something we always want. The migration command will always succeed if there
+# are no migrations to run.
+wait_for_database() {
+  echo "Running Rails database migrations"
+  i=0
+  while [ "$i" -lt 10 ]; do
+    i=$((i + 1))
+    bundle exec rails db:migrate &>/dev/null && return
+    echo "migrations failed, waiting 5 seconds to try again"
+    sleep 5
+  done
 
-if bundle exec rails db:migrate:status &> /dev/null; then
-  bundle exec rails db:migrate
-fi
-bundle install
-bundle exec sidekiq -C ./config/sidekiq.yml &
-bundle exec rails s -b 0.0.0.0
+  bundle exec rails db:migrate || exit 1
+}
+
+init() {
+  echo "Verifying bundled gems are installed"
+  rm -f tmp/pids/server.pid
+  bundle install
+}
+
+# When user requests bash or sh, don't run the init function
+case "$@" in
+  bash | sh )
+    exec "$@"
+  ;;
+
+  *)
+  wait_for_database
+  init
+  echo "Running bundle exec $@..."
+  exec bundle exec "$@"
+esac
