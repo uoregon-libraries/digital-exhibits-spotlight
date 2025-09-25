@@ -13,10 +13,10 @@ services:
   db:
     image: mariadb:5.5
     environment:
-      - MYSQL_ROOT_PASSWORD=ABRACADABRA
-      - MYSQL_PASSWORD=ABRACADABRA
-      - MYSQL_DATABASE=spotlightdev
-      - MYSQL_USER=root
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_PASSWORD: spotlight
+      MYSQL_DATABASE: spotlight
+      MYSQL_USER: spotlight
     volumes:
       - db:/var/lib/mysql
       - ./config/mysql/:/etc/mysql/conf.d:Z
@@ -35,16 +35,19 @@ services:
     volumes:
       - .:/app
     environment:
-      - MAIL_SERVER=example.org
-      - MAIL_SENDER=noreply@example.org
-      - URL_HOST=localhost:3000
-      - SOLR_URL=http://solr:8983/solr/mycore
-      - OD_URL=https://oregondigital.org
-      - REDIS_HOST=redis
-      - REDIS_PORT='6379'
-      - ACTIVE_JOB_QUEUE_ADAPTER=sidekiq
-      - SIDEKIQ_ADMIN_SAFE_URLS='http://localhost:3000'
-      - MYSQL_DATABASE=spotlightdev
+      MAIL_SERVER: example.org
+      MAIL_SENDER: noreply@example.org
+      URL_HOST: localhost:3000
+      SOLR_URL: http://solr:8983/solr/mycore
+      OD_URL: https://oregondigital.org
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      ACTIVE_JOB_QUEUE_ADAPTER: sidekiq
+      SIDEKIQ_ADMIN_SAFE_URLS: 'http://localhost:3000'
+      MYSQL_HOST: db
+      MYSQL_PASSWORD: spotlight
+      MYSQL_DATABASE: spotlight
+      MYSQL_USER: spotlight
     command: >
       bash -c "./build/entrypoint.sh"
     depends_on:
