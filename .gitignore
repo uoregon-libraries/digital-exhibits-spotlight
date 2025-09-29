@@ -28,4 +28,4 @@
 
 docker-compose.override.yml
 /build/mirror-vars.sh
-/db-export
+/exports
