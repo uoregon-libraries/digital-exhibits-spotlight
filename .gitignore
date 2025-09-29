@@ -27,4 +27,4 @@
 .byebug_history
 
 docker-compose.override.yml
-/db-export
+/exports
