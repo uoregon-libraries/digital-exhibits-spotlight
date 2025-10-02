@@ -10,12 +10,9 @@ RUN apk add --update --no-cache \
       bash \
       build-base \
       git \
-      nodejs \
-      sqlite-dev \
       tzdata \
       mariadb-dev \
-      imagemagick \
-      nano
+      imagemagick
 
 RUN mkdir -p /app
 WORKDIR /app
