@@ -28,7 +28,6 @@ services:
       - redis:/data
 
   web:
-    image: uoregon-libraries/digital-exhibits-spotlight:202212200628
     build:
       dockerfile: Dockerfile
       context: .
