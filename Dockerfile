@@ -21,7 +21,7 @@ WORKDIR /app
 # avoids requiring a five-minute bundle build every time the app changes.
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
-RUN bundle install 
+RUN bundle install
 ADD . /app
 
 ENTRYPOINT ["/app/build/entrypoint.sh"]
