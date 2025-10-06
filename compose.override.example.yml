@@ -16,6 +16,8 @@ services:
   web:
     ports:
       - "3000:3000"
+    environment:
+      RAILS_SERVE_STATIC_FILES: true
     volumes:
       # If you mirror production's files, you'll want this volume
       - ./exports/data:/app/public/uploads/spotlight

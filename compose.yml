@@ -53,6 +53,9 @@ services:
       - solr
       - redis
       - sidekiq
+    volumes:
+      - assets:/app/public/assets
+      - uploads:/app/public/uploads
     logging:
       driver: json-file
       options:
@@ -70,3 +73,5 @@ volumes:
   data-solr-dev: {}
   db: {}
   redis: {}
+  assets: {}
+  uploads: {}
