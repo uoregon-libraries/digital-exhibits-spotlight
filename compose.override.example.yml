@@ -1,5 +1,6 @@
 # This is a very simple example for using Spotlight for local development,
-# exposing the various apps' endpoints to the host
+# exposing the various apps' endpoints to the host, showing examples for
+# mounting files, overriding a few Rails settings, etc.
 services:
   solr:
     ports:
