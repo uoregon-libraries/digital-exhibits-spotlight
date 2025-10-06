@@ -38,6 +38,7 @@ services:
       URL_HOST: localhost:3000
       SOLR_URL: http://solr:8983/solr/mycore
       OD_URL: https://oregondigital.org
+      RAILS_LOG_TO_STDOUT: true
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       ACTIVE_JOB_QUEUE_ADAPTER: sidekiq
@@ -52,6 +53,11 @@ services:
       - solr
       - redis
       - sidekiq
+    logging:
+      driver: json-file
+      options:
+        max-file: '4'
+        max-size: 250m
 
   sidekiq:
     extends: web
