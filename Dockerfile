@@ -47,4 +47,6 @@ ADD spec              /app/spec
 ADD test              /app/test
 RUN mkdir -p /app/log /app/tmp /app/vendor
 
+RUN EDITOR=sed rails credentials:edit
+
 ENTRYPOINT ["/app/build/entrypoint.sh"]
