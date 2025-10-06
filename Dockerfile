@@ -30,8 +30,6 @@ RUN bundle install
 # files in a subdir so the "metafiles" like compose.yml are totally separate
 # from the web-required files.
 ADD .solr_wrapper.yml /app/.solr_wrapper.yml
-ADD Gemfile           /app/Gemfile
-ADD Gemfile.lock      /app/Gemfile.lock
 ADD Rakefile          /app/Rakefile
 ADD app               /app/app
 ADD bin               /app/bin
