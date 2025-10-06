@@ -39,6 +39,7 @@ services:
       SOLR_URL: http://solr:8983/solr/mycore
       OD_URL: https://oregondigital.org
       RAILS_LOG_TO_STDOUT: true
+      RAILS_ENV: production
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       ACTIVE_JOB_QUEUE_ADAPTER: sidekiq
