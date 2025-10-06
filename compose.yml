@@ -9,7 +9,8 @@ services:
       - solr-precreate
       - mycore
     environment:
-      - VERBOSE=yes
+      VERBOSE: yes
+
   db:
     image: mariadb:5.5
     environment:
