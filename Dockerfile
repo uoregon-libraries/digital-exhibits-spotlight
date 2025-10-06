@@ -1,8 +1,8 @@
 FROM ruby:2.7-alpine AS web
 
 # Necessary for bundler to operate properly
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 RUN gem install bundler -v 2.4.22
 
