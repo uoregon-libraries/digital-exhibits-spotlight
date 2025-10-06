@@ -4,6 +4,9 @@
 # something we always want. The migration command will always succeed if there
 # are no migrations to run.
 wait_for_database() {
+  echo "Precompiling assets"
+  rails assets:precompile
+
   echo "Running Rails database migrations"
   i=0
   while [ "$i" -lt 10 ]; do
