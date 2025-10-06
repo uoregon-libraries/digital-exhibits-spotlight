@@ -22,6 +22,29 @@ WORKDIR /app
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install
-ADD . /app
+
+# We add the app piecemeal out of paranoia. If somebody gets a webshell, they
+# should only have the app, not anything from the local environment, which
+# could have sensitive information (vim swap files, IDE files, local log files
+# with passwords or something, etc.). TODO: consider putting all app-specific
+# files in a subdir so the "metafiles" like compose.yml are totally separate
+# from the web-required files.
+ADD .solr_wrapper.yml /app/.solr_wrapper.yml
+ADD Gemfile           /app/Gemfile
+ADD Gemfile.lock      /app/Gemfile.lock
+ADD Rakefile          /app/Rakefile
+ADD app               /app/app
+ADD bin               /app/bin
+ADD build             /app/build
+ADD config            /app/config
+ADD config.ru         /app/config.ru
+ADD db                /app/db
+ADD lib               /app/lib
+ADD package.json      /app/package.json
+ADD public            /app/public
+ADD solr              /app/solr
+ADD spec              /app/spec
+ADD test              /app/test
+RUN mkdir -p /app/log /app/tmp /app/vendor
 
 ENTRYPOINT ["/app/build/entrypoint.sh"]
