@@ -2,3 +2,4 @@ log/*
 .git
 *.sql
 snapshot.*
+exports
