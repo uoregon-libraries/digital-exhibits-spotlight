@@ -20,6 +20,13 @@ services:
     environment:
       RAILS_ENV: development
       RAILS_SERVE_STATIC_FILES: true
+    # Only override this list if you really know what you're doing! In this
+    # case, we are saying the app can run without sidekiq. This can be fine in
+    # some dev situations, but not all!
+    depends_on: !override
+      - db
+      - solr
+      - redis
     volumes:
       # If you mirror production's files, you'll want this volume
       - ./exports/data:/app/public/uploads/spotlight
