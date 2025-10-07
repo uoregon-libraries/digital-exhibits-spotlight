@@ -29,6 +29,13 @@ services:
       - redis:/data
 
   web:
+    image: nginx:1.15
+    volumes:
+      - ./config/nginx/proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+  app:
     build:
       dockerfile: Dockerfile
       context: .
@@ -64,7 +71,7 @@ services:
         max-size: 250m
 
   sidekiq:
-    extends: web
+    extends: app
     command: sidekiq -C ./config/sidekiq.yml
     depends_on: !override
       - db
