@@ -14,9 +14,13 @@ services:
       # container auto-loads the SQL
       - ./exports/db:/docker-entrypoint-initdb.d
 
+  # nginx proxies all requests, we expose it to the host. DO NOT expose the
+  # "app" service directly.
   web:
     ports:
-      - "3000:3000"
+      - "3000:80"
+
+  app:
     environment:
       RAILS_ENV: development
       RAILS_SERVE_STATIC_FILES: true
