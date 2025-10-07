@@ -4,9 +4,6 @@
 # something we always want. The migration command will always succeed if there
 # are no migrations to run.
 wait_for_database() {
-  echo "Precompiling assets"
-  rails assets:precompile
-
   echo "Running Rails database migrations"
   i=0
   while [ "$i" -lt 10 ]; do
@@ -19,10 +16,15 @@ wait_for_database() {
   bundle exec rails db:migrate || exit 1
 }
 
-init() {
+bundle_install() {
   echo "Verifying bundled gems are installed"
   rm -f tmp/pids/server.pid
   bundle install
+}
+
+compile_assets() {
+  echo "Precompiling assets"
+  rails assets:precompile
 }
 
 # When user requests bash or sh, don't run the init function
@@ -32,8 +34,9 @@ case "$@" in
   ;;
 
   *)
+  bundle_install
   wait_for_database
-  init
+  compile_assets
   echo "Running bundle exec $@..."
   exec bundle exec "$@"
 esac
