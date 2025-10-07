@@ -27,3 +27,5 @@
 .byebug_history
 
 docker-compose.override.yml
+/exports
+/compose.override.yml
