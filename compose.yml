@@ -41,6 +41,7 @@ services:
       SOLR_URL: http://solr:8983/solr/mycore
       OD_URL: https://oregondigital.org
       RAILS_LOG_TO_STDOUT: true
+      RAILS_LOG_LEVEL: info
       RAILS_ENV: production
       REDIS_HOST: redis
       REDIS_PORT: '6379'
