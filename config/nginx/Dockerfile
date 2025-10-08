@@ -1,3 +1,4 @@
 FROM nginx:1.15
 
-ADD proxy.conf /etc/nginx/conf.d/default.conf
+COPY *.conf /etc/nginx/
+COPY ./conf.d/*.conf /etc/nginx/conf.d/
