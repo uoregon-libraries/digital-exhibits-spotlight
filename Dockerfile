@@ -12,7 +12,10 @@ RUN apk add --update --no-cache \
       git \
       tzdata \
       mariadb-dev \
-      imagemagick
+      imagemagick \
+      # Necessary for mac development
+      gcompat \
+      nodejs
 
 RUN mkdir -p /app
 WORKDIR /app
