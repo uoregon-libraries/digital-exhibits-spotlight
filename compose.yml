@@ -66,9 +66,6 @@ services:
   sidekiq:
     extends: web
     command: sidekiq -C ./config/sidekiq.yml
-    depends_on: !override
-      - db
-      - solr
 
 volumes:
   data-solr-dev: {}
