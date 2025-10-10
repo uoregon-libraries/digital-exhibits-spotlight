@@ -23,6 +23,8 @@ services:
     # Only override this list if you really know what you're doing! In this
     # case, we are saying the app can run without sidekiq. This can be fine in
     # some dev situations, but not all!
+    #
+    # Note that !override is *not* compatible with podman compose yet.
     depends_on: !override
       - db
       - solr

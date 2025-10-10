@@ -28,7 +28,7 @@ services:
     volumes:
       - redis:/data
 
-  web:
+  app-base: &base
     build:
       dockerfile: Dockerfile
       context: .
@@ -48,12 +48,6 @@ services:
       MYSQL_PASSWORD: spotlight
       MYSQL_DATABASE: spotlight
       MYSQL_USER: spotlight
-    command: rails s -b 0.0.0.0
-    depends_on:
-      - db
-      - solr
-      - redis
-      - sidekiq
     volumes:
       - assets:/app/public/assets
       - uploads:/app/public/uploads
@@ -63,12 +57,22 @@ services:
         max-file: '4'
         max-size: 250m
 
-  sidekiq:
-    extends: web
-    command: sidekiq -C ./config/sidekiq.yml
-    depends_on: !override
+  web:
+    <<: *base
+    command: rails s -b 0.0.0.0
+    depends_on:
       - db
       - solr
+      - redis
+      - sidekiq
+
+  sidekiq:
+    <<: *base
+    command: sidekiq -C ./config/sidekiq.yml
+    depends_on:
+      - db
+      - solr
+      - redis
 
 volumes:
   data-solr-dev: {}
