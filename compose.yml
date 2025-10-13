@@ -1,13 +1,9 @@
 services:
   solr:
-    image: solr:6.3.0
+    build:
+      dockerfile: Dockerfile-solr
     volumes:
       - data-solr-dev:/opt/solr/server/solr/mycores/
-      - ./solr/config:/opt/solr/server/solr/configsets/data_driven_schema_configs
-    entrypoint:
-      - docker-entrypoint.sh
-      - solr-precreate
-      - mycore
     environment:
       VERBOSE: yes
 
