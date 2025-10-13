@@ -8,7 +8,8 @@ services:
       VERBOSE: yes
 
   db:
-    image: mariadb:10.4-bionic
+    build:
+      dockerfile: Dockerfile-db
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 1
       MYSQL_PASSWORD: spotlight
@@ -16,7 +17,6 @@ services:
       MYSQL_USER: spotlight
     volumes:
       - db:/var/lib/mysql
-      - ./config/mysql/:/etc/mysql/conf.d:Z
 
   redis:
     image: redis:4-alpine
