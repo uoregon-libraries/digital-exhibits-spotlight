@@ -43,6 +43,7 @@ services:
       RAILS_LOG_TO_STDOUT: true
       RAILS_LOG_LEVEL: info
       RAILS_ENV: production
+      RAILS_SERVE_STATIC_FILES: true
       REDIS_HOST: redis
       REDIS_PORT: '6379'
       ACTIVE_JOB_QUEUE_ADAPTER: sidekiq
