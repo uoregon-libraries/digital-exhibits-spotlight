@@ -22,7 +22,7 @@ echo "Done (users)."
 echo "Mirroring core tables..."
 ssh $dev@$pod_host sudo -u $podman_user /usr/local/bin/podman-mysqldump.sh $pod_subdir $service \
     -t --ignore-table=spotlight.searches --ignore-table=spotlight.users spotlight \
-    | sed 's|https://expo.uoregon.edu/|http://localhost:3000/|g' \
+    | sed "s|$base_url_remote|$base_url_local|g" \
     > ./exports/db/003-core.sql
 echo "Done (core)."
 
