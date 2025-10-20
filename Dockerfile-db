@@ -1,0 +1,4 @@
+FROM mariadb:10.4-bionic
+
+VOLUME /var/lib/mysql
+COPY config/mysql /etc/mysql/conf.d

@@ -1,0 +1,6 @@
+FROM solr:6.3.0
+
+VOLUME /opt/solr/server/solr/mycores/
+RUN rm /opt/solr/server/solr/configsets/data_driven_schema_configs -rf
+COPY solr/config /opt/solr/server/solr/configsets/data_driven_schema_configs
+CMD ["solr-precreate", "mycore"]
