@@ -1,18 +1,14 @@
-FROM ruby:2.7-alpine AS web
+FROM ruby:2.7-bullseye AS web
 
-# Necessary for bundler to operate properly
-ENV LANG=C.UTF-8
-ENV LC_ALL=C.UTF-8
-
-RUN gem install bundler -v 2.4.22
-
-RUN apk add --update --no-cache \
-      bash \
-      build-base \
+RUN apt-get -y update && apt-get -y upgrade
+RUN apt-get -y install \
+      build-essential \
       git \
       tzdata \
-      mariadb-dev \
+      libmariadb-dev \
       imagemagick
+
+RUN gem install bundler -v 2.4.22
 
 RUN mkdir -p /app
 WORKDIR /app
