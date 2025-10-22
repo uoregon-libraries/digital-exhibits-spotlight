@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # wait_for_database actually waits for migrations to succeed, since that's
 # something we always want. The migration command will always succeed if there
