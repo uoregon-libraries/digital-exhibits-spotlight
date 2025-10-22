@@ -23,8 +23,11 @@ bundle_install() {
 }
 
 compile_assets() {
-  echo "Precompiling assets"
-  rails assets:precompile
+  if [[ ! -f tmp/assets-compiled ]]; then
+    echo "Precompiling assets"
+    rails assets:precompile
+    touch tmp/assets-compiled
+  fi
 }
 
 # When user requests bash or sh, don't run the init function
