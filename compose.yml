@@ -24,11 +24,11 @@ services:
     volumes:
       - redis:/data
 
-  web:
+  proxy:
     build:
       context: config/nginx
     depends_on:
-      - app
+      - web
 
   app-base: &base
     build:
@@ -61,7 +61,7 @@ services:
         max-file: '4'
         max-size: 250m
 
-  app:
+  web:
     <<: *base
     command: rails s -b 0.0.0.0
     depends_on:

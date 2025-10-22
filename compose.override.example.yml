@@ -15,12 +15,12 @@ services:
       - ./exports/db:/docker-entrypoint-initdb.d
 
   # nginx proxies all requests, we expose it to the host. DO NOT expose the
-  # "app" service directly.
-  web:
+  # "web" service directly.
+  proxy:
     ports:
       - "3000:80"
 
-  app:
+  web:
     # Only override this list if you really know what you're doing! In this
     # case, we are saying the app can run without sidekiq. This can be fine in
     # some dev situations, but not all!

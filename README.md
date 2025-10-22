@@ -10,11 +10,9 @@ necessary for the application to run.
 
 Key services:
 
-- `web` is an nginx proxy that caches some static content for faster delivery. To
-  simplify migrating from the pre-nginx varsion of this app, the name "web" was
-  chosen to keep muscle-memory working for those naming the service directly,
-  e.g., `docker compose up -d web`.
-- `app` is the actual Rails app being served up by Puma.
+- `proxy` is an nginx proxy that caches some static content for faster
+  delivery.
+- `web` is the actual Rails app being served up by Puma.
 - `sidekiq` runs all background jobs.
 
 ## Local dev
@@ -64,10 +62,7 @@ or something. With the prod data, this will take a few minutes.
 
 - Copy `compose.override.example.yml` to `compose.override.yml` and edit as
   needed. **Do not use the copied override exactly as-is!**
-- Use docker compose, e.g., `docker compose up -d web`
-- Watching logs? Remember that `web` is nginx: it's useful for watching the
-  actual incoming requests, but `app` is where you'll see application-level
-  error logs.
+- Use docker compose, e.g., `docker compose up -d proxy`
 
 ### Rails console stuff to know
 
