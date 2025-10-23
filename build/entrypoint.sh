@@ -23,10 +23,14 @@ bundle_install() {
 }
 
 compile_assets() {
-  if [[ ! -f tmp/assets-compiled ]]; then
+  # We don't want to recompile assets more than once a week, at least not on
+  # container startup - it's just incredibly slow even when there are *no
+  # changes*. Devs can manually recompile more often if needed.
+  dtfile="public/assets/precompiled.$(date +'%Y-%W')"
+  if [[ ! -f $dtfile ]]; then
     echo "Precompiling assets"
     rails assets:precompile
-    touch tmp/assets-compiled
+    touch $dtfile
   fi
 }
 
