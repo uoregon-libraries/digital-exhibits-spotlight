@@ -6,6 +6,8 @@ services:
       - data-solr-dev:/opt/solr/server/solr/mycores/
     environment:
       VERBOSE: yes
+    networks:
+      internal:
 
   db:
     build:
@@ -17,18 +19,25 @@ services:
       MYSQL_USER: spotlight
     volumes:
       - db:/var/lib/mysql
+    networks:
+      internal:
 
   redis:
     image: redis:4-alpine
     command: redis-server
     volumes:
       - redis:/data
+    networks:
+      internal:
 
   proxy:
     build:
       context: config/nginx
     depends_on:
       - web
+    networks:
+      internal:
+      external:
 
   app-base: &base
     build:
@@ -60,6 +69,8 @@ services:
       options:
         max-file: '4'
         max-size: 250m
+    networks:
+      internal:
 
   web:
     <<: *base
@@ -69,6 +80,11 @@ services:
       - solr
       - redis
       - sidekiq
+    # Assign a static IP so nginx's cached IP always works - this prevents
+    # podman from rotating IPs which can make nginx unhappy
+    networks:
+      internal:
+        ipv4_address: 10.90.200.200
 
   sidekiq:
     <<: *base
@@ -84,3 +100,12 @@ volumes:
   redis: {}
   assets: {}
   uploads: {}
+
+networks:
+  external:
+  internal:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.90.200.0/24
+          gateway: 10.90.200.1
