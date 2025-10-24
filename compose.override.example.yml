@@ -33,7 +33,7 @@ services:
     # Assign a static IP so nginx's cached IP always works - this prevents
     # podman from rotating IPs which can make nginx unhappy
     networks:
-      internal:
+      proxy:
         ipv4_address: 10.90.200.200
     volumes:
       # If you mirror production's files, you'll want this volume
@@ -61,7 +61,7 @@ networks:
   # NOTE: (a) the subnet *must* include the static IP assigned above, and (b)
   # if you run multiple apps at once, you **must** manually configure the
   # subnets or they can collide!
-  internal:
+  proxy:
     driver: bridge
     ipam:
       config:

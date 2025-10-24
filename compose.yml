@@ -36,8 +36,7 @@ services:
     depends_on:
       - web
     networks:
-      internal: {}
-      external: {}
+      proxy: {}
 
   app-base: &base
     build:
@@ -80,6 +79,9 @@ services:
       - solr
       - redis
       - sidekiq
+    networks:
+      internal: {}
+      proxy: {}
 
   sidekiq:
     <<: *base
@@ -97,5 +99,5 @@ volumes:
   uploads: {}
 
 networks:
-  external: {}
   internal: {}
+  proxy: {}
