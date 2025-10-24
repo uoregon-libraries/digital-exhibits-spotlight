@@ -80,11 +80,6 @@ services:
       - solr
       - redis
       - sidekiq
-    # Assign a static IP so nginx's cached IP always works - this prevents
-    # podman from rotating IPs which can make nginx unhappy
-    networks:
-      internal:
-        ipv4_address: 10.90.200.200
 
   sidekiq:
     <<: *base
@@ -104,8 +99,3 @@ volumes:
 networks:
   external:
   internal:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.90.200.0/24
-          gateway: 10.90.200.1
