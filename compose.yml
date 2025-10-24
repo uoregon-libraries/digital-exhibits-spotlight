@@ -7,7 +7,7 @@ services:
     environment:
       VERBOSE: yes
     networks:
-      internal:
+      internal: {}
 
   db:
     build:
@@ -20,7 +20,7 @@ services:
     volumes:
       - db:/var/lib/mysql
     networks:
-      internal:
+      internal: {}
 
   redis:
     image: redis:4-alpine
@@ -28,7 +28,7 @@ services:
     volumes:
       - redis:/data
     networks:
-      internal:
+      internal: {}
 
   proxy:
     build:
@@ -36,8 +36,8 @@ services:
     depends_on:
       - web
     networks:
-      internal:
-      external:
+      internal: {}
+      external: {}
 
   app-base: &base
     build:
@@ -70,7 +70,7 @@ services:
         max-file: '4'
         max-size: 250m
     networks:
-      internal:
+      internal: {}
 
   web:
     <<: *base
@@ -97,5 +97,5 @@ volumes:
   uploads: {}
 
 networks:
-  external:
-  internal:
+  external: {}
+  internal: {}
