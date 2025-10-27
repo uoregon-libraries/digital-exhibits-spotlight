@@ -30,11 +30,6 @@ services:
       - db
       - solr
       - redis
-    # Assign a static IP so nginx's cached IP always works - this prevents
-    # podman from rotating IPs which can make nginx unhappy
-    networks:
-      proxy:
-        ipv4_address: 10.90.200.200
     volumes: &webvols
       # If you mirror production's files, you'll want this volume
       - ./exports/data:/app/public/uploads/spotlight
@@ -60,15 +55,3 @@ services:
   # otherwise reindexing breaks. Don't ask how.
   sidekiq:
     volumes: *webvols
-
-networks:
-  # Set up a custom subnet so you can have a static IP for the "web" service.
-  # NOTE: (a) the subnet *must* include the static IP assigned above, and (b)
-  # if you run multiple apps at once, you **must** manually configure the
-  # subnets or they can collide!
-  proxy:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.90.200.0/24
-          gateway: 10.90.200.1

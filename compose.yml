@@ -6,8 +6,6 @@ services:
       - data-solr-dev:/opt/solr/server/solr/mycores/
     environment:
       VERBOSE: yes
-    networks:
-      internal: {}
 
   db:
     build:
@@ -19,16 +17,12 @@ services:
       MYSQL_USER: spotlight
     volumes:
       - db:/var/lib/mysql
-    networks:
-      internal: {}
 
   redis:
     image: redis:4-alpine
     command: redis-server
     volumes:
       - redis:/data
-    networks:
-      internal: {}
 
   proxy:
     build:
@@ -36,12 +30,9 @@ services:
     restart: unless-stopped
     depends_on:
       - web
-    networks:
-      proxy: {}
     volumes:
       - caddy-data:/data
       - caddy-config:/config
-
 
   app-base: &base
     build:
@@ -73,8 +64,6 @@ services:
       options:
         max-file: '4'
         max-size: 250m
-    networks:
-      internal: {}
 
   web:
     <<: *base
@@ -84,9 +73,6 @@ services:
       - solr
       - redis
       - sidekiq
-    networks:
-      internal: {}
-      proxy: {}
 
   sidekiq:
     <<: *base
@@ -104,7 +90,3 @@ volumes:
   caddy-config: {}
   assets: {}
   uploads: {}
-
-networks:
-  internal: {}
-  proxy: {}
