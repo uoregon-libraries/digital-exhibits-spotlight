@@ -1,0 +1,37 @@
+localhost:80 {
+  log {
+    level INFO
+  }
+  encode zstd gzip
+
+  # Static asset changes aren't likely to happen without restarting the full
+  # stack, so we cache them for a week
+  @assets path /assets/*
+  handle @assets {
+    cache {
+      ttl 168h
+    }
+    reverse_proxy web:3000 {
+      header_down -Cache-Control
+    }
+  }
+
+  # IIIF responses get a shorter cache in case an upload is replaced or
+  # something. This could result in out-of-sync image views, but the caching is
+  # critically important to keep Rails from being overloaded, especially as we
+  # look into multiple front-end heads.
+  @iiif_images path_regexp ^/images/.*\/default\.jpg$
+  handle @iiif_images {
+    cache {
+      ttl 24h
+    }
+    reverse_proxy web:3000 {
+      header_down -Cache-Control
+    }
+  }
+
+  # Everything else is just proxied, no cache
+  handle {
+    reverse_proxy web:3000
+  }
+}

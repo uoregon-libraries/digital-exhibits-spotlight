@@ -32,11 +32,16 @@ services:
 
   proxy:
     build:
-      context: config/nginx
+      dockerfile: Dockerfile-caddy
+    restart: unless-stopped
     depends_on:
       - web
     networks:
       proxy: {}
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+
 
   app-base: &base
     build:
@@ -95,6 +100,8 @@ volumes:
   data-solr-dev: {}
   db: {}
   redis: {}
+  caddy-data: {}
+  caddy-config: {}
   assets: {}
   uploads: {}
 
