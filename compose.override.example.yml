@@ -35,7 +35,7 @@ services:
     networks:
       proxy:
         ipv4_address: 10.90.200.200
-    volumes:
+    volumes: &webvols
       # If you mirror production's files, you'll want this volume
       - ./exports/data:/app/public/uploads/spotlight
 
@@ -55,6 +55,11 @@ services:
       - ./spec:/app/spec
       - ./test:/app/test
       - ...
+
+  # Any volumes you mount into web should also be mounted into sidekiq,
+  # otherwise reindexing breaks. Don't ask how.
+  sidekiq:
+    volumes: *webvols
 
 networks:
   # Set up a custom subnet so you can have a static IP for the "web" service.

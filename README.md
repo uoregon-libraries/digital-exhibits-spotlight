@@ -39,6 +39,16 @@ server!
 
 ### Making Solr aware of your data
 
+**Note**: you *must* have your uploads available to the `sidekiq` service if
+you want your reindex to work! The index procedure will "lose" images and even
+some metadata if you run a reindex without properly mounting in uploads!
+
+If you only rely on the volumes, you're fine: `web` and `sidekiq` both use the
+same volume for the uploads dir. But if you mount things in from an external
+source, **you *must* mount the same things into both containers!!**
+
+---
+
 To index an exhibit, you'll need to go into a rails console, pick the exhibit,
 and tell it to reindex "later":
 
