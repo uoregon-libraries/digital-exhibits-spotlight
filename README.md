@@ -10,8 +10,7 @@ necessary for the application to run.
 
 Key services:
 
-- `proxy` is an nginx proxy that caches some static content for faster
-  delivery.
+- `proxy` is a Caddy proxy that caches some static content for faster delivery.
 - `web` is the actual Rails app being served up by Puma.
 - `sidekiq` runs all background jobs.
 
