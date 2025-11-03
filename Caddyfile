@@ -17,9 +17,10 @@
   }
 
   # IIIF responses get a shorter cache in case an upload is replaced or
-  # something. This could result in out-of-sync image views, but the caching is
-  # critically important to keep Rails from being overloaded, especially as we
-  # look into multiple front-end heads.
+  # something. This could still result in out-of-sync image views, but some
+  # amount of IIIF caching is critically important to keep Rails from being
+  # overloaded, especially as we look into multiple front-end heads, where each
+  # one would have to do its own RIIIF caching.
   @iiif_images path_regexp ^/images/.*\/default\.jpg$
   handle @iiif_images {
     cache {
