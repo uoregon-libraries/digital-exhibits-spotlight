@@ -34,7 +34,7 @@
   # Turnstile lives in front of all searches
   @catalog_search {
     path */catalog*
-    expression {query}.matches("(^|&)(q=|f\\[)")
+    expression {query}.matches("(^|&)(q=|f\\[|f%5B)")
   }
   handle @catalog_search {
     reverse_proxy tps:8080
