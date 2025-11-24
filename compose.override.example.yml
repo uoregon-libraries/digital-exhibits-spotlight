@@ -20,6 +20,14 @@ services:
     ports:
       - "3000:80"
 
+  # TPS: turnstile protection for various high-resource endpoints
+  tps:
+    environment:
+      TURNSTILE_SITE_KEY: "<cloudflare turnstile widget site key>"
+      TURNSTILE_SECRET_KEY: "<cloudflare turnstile widget secret key>"
+      JWT_SIGNING_KEY: "shhhhhh-this-is-very-secret"
+      PROXY_TARGET: "https://foo.x"
+
   web:
     # Only override this list if you really know what you're doing! In this
     # case, we are saying the app can run without sidekiq. This can be fine in
