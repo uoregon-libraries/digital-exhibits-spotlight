@@ -26,7 +26,6 @@ services:
       TURNSTILE_SITE_KEY: "<cloudflare turnstile widget site key>"
       TURNSTILE_SECRET_KEY: "<cloudflare turnstile widget secret key>"
       JWT_SIGNING_KEY: "shhhhhh-this-is-very-secret"
-      PROXY_TARGET: "https://foo.x"
 
   web:
     # Only override this list if you really know what you're doing! In this
