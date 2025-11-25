@@ -14,7 +14,7 @@ services:
       # container auto-loads the SQL
       - ./exports/db:/docker-entrypoint-initdb.d
 
-  # nginx proxies all requests, we expose it to the host. DO NOT expose the
+  # Caddy proxies all requests, we expose it to the host. DO NOT expose the
   # "web" service directly.
   proxy:
     ports:
