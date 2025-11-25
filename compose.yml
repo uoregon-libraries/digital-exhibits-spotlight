@@ -59,11 +59,6 @@ services:
     volumes:
       - assets:/app/public/assets
       - uploads:/app/public/uploads
-    logging:
-      driver: json-file
-      options:
-        max-file: '4'
-        max-size: 250m
 
   web:
     <<: *base
