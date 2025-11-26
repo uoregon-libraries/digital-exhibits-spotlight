@@ -27,6 +27,11 @@ services:
       TURNSTILE_SECRET_KEY: "<cloudflare turnstile widget secret key>"
       JWT_SIGNING_KEY: "shhhhhh-this-is-very-secret"
 
+      # Use these for testing the "success" route - these are Turnstile test
+      # keys that make the challenge always auto-pass
+      #TURNSTILE_SITE_KEY: "1x00000000000000000000AA"
+      #TURNSTILE_SECRET_KEY: "1x0000000000000000000000000000000AA"
+
   web:
     # Only override this list if you really know what you're doing! In this
     # case, we are saying the app can run without sidekiq. This can be fine in
