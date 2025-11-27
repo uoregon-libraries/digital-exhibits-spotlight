@@ -1,0 +1,15 @@
+FROM golang:1-alpine AS build
+
+RUN apk update && apk upgrade
+RUN apk add make git
+
+WORKDIR /usr/local/src/turnstile-proxy
+RUN git clone https://github.com/uoregon-libraries/turnstile-proxy-server.git -b v1.0.0-rc2 .
+RUN make
+
+FROM alpine AS app
+WORKDIR /usr/local/tps
+COPY --from=build /usr/local/src/turnstile-proxy/bin/tps tps
+ENV GIN_MODE=release
+ENTRYPOINT ["/usr/local/tps/tps"]
+CMD ["serve"]

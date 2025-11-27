@@ -31,7 +31,16 @@
     }
   }
 
-  # Everything else is just proxied, no cache
+  # Turnstile lives in front of all searches
+  @catalog_search {
+    path */catalog*
+    expression {query}.matches("(^|&)(q=|f\\[|f%5B)")
+  }
+  handle @catalog_search {
+    reverse_proxy tps:8080
+  }
+
+  # Everything else is just proxied, no cache, no turnstile "interceptor"
   handle {
     reverse_proxy web:3000
   }

@@ -30,9 +30,40 @@ services:
     restart: unless-stopped
     depends_on:
       - web
+      - tps
     volumes:
       - caddy-data:/data
       - caddy-config:/config
+
+  tps:
+    build:
+      dockerfile: Dockerfile-tps
+    depends_on:
+      web:
+        condition: service_started
+      tps-db:
+        condition: service_healthy
+    environment:
+      GIN_MODE: "release"
+      BIND_ADDR: ":8080"
+      DATABASE_DSN: "tps:tps@tcp(tps-db:3306)/tps?parseTime=true"
+      PROXY_TARGET: "http://web:3000"
+
+  tps-db:
+    image: mariadb:lts
+    environment:
+      MYSQL_DATABASE: tps
+      MYSQL_USER: tps
+      MYSQL_PASSWORD: tps
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    volumes:
+      - tps-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
 
   app-base: &base
     build:
@@ -80,6 +111,7 @@ services:
 volumes:
   data-solr-dev: {}
   db: {}
+  tps-db: {}
   redis: {}
   caddy-data: {}
   caddy-config: {}
