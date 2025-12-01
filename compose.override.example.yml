@@ -19,6 +19,13 @@ services:
   proxy:
     ports:
       - "3000:80"
+    # Do not copy this env setting as-is; if you copy things, **you must modify
+    # this setting**.
+    #
+    # This is an example for setting a single IP address as your trusted proxy,
+    # rather than the default of trusting all private IP ranges.
+    environment:
+      TRUSTED_PROXIES: 172.0.0.1
 
   # TPS: turnstile protection for various high-resource endpoints
   tps:

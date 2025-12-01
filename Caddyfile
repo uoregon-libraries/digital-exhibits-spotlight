@@ -1,3 +1,11 @@
+{
+  servers {
+    trusted_proxies static {$TRUSTED_PROXIES:private_ranges}
+    trusted_proxies_strict
+    client_ip_headers X-Real-IP X-Forwarded-For
+  }
+}
+
 :80 {
   log {
     level INFO
