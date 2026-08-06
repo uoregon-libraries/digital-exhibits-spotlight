@@ -9,8 +9,16 @@ RUN make
 
 FROM docker.io/alpine AS app
 WORKDIR /usr/local/tps
+RUN mkdir -p /var/local/tps/data
 COPY --from=build /usr/local/src/turnstile-proxy/bin/tps tps
 COPY tps-templates /var/local/tps/templates
+
+# Settings the end-user doesn't need to worry about when using this in our
+# compose setup
 ENV GIN_MODE=release
+ENV LOG_DB_PATH=/var/local/tps/data/tps.db
+ENV BIND_ADDR=:8080
+ENV PROXY_TARGET=http://web:3000
+
 ENTRYPOINT ["/usr/local/tps/tps"]
 CMD ["serve"]

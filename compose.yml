@@ -42,14 +42,10 @@ services:
       web:
         condition: service_started
     environment:
-      GIN_MODE: "release"
-      BIND_ADDR: ":8080"
-      PROXY_TARGET: "http://web:3000"
-      LOG_DB_PATH: "/var/local/tps/data/tps.db"
       LOG_RETENTION: "24h"
-      TOKEN_LIFETIME: "24H"
+      TOKEN_LIFETIME: "24h"
     volumes:
-      - tps:/var/local/tps
+      - tps-data:/var/local/tps/data
 
   app-base: &base
     build:
@@ -97,7 +93,7 @@ services:
 volumes:
   data-solr-dev: {}
   db: {}
-  tps: {}
+  tps-data: {}
   redis: {}
   caddy-data: {}
   caddy-config: {}
