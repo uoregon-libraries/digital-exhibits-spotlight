@@ -10,6 +10,7 @@ RUN make
 FROM docker.io/alpine AS app
 WORKDIR /usr/local/tps
 COPY --from=build /usr/local/src/turnstile-proxy/bin/tps tps
+COPY tps-templates /var/local/tps/templates
 ENV GIN_MODE=release
 ENTRYPOINT ["/usr/local/tps/tps"]
 CMD ["serve"]
