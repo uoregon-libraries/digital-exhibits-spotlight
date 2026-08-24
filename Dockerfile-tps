@@ -1,15 +1,24 @@
-FROM golang:1-alpine AS build
+FROM docker.io/golang:1-alpine AS build
 
 RUN apk update && apk upgrade
 RUN apk add make git
 
 WORKDIR /usr/local/src/turnstile-proxy
-RUN git clone https://github.com/uoregon-libraries/turnstile-proxy-server.git -b v1.0.0-rc2 .
+RUN git clone https://github.com/uoregon-libraries/turnstile-proxy-server.git -b v3.1.0 .
 RUN make
 
-FROM alpine AS app
+FROM docker.io/alpine AS app
 WORKDIR /usr/local/tps
+RUN mkdir -p /var/local/tps/data
 COPY --from=build /usr/local/src/turnstile-proxy/bin/tps tps
+COPY tps-templates /var/local/tps/templates
+
+# Settings the end-user doesn't need to worry about when using this in our
+# compose setup
 ENV GIN_MODE=release
+ENV LOG_DB_PATH=/var/local/tps/data/tps.db
+ENV BIND_ADDR=:8080
+ENV PROXY_TARGET=http://web:3000
+
 ENTRYPOINT ["/usr/local/tps/tps"]
 CMD ["serve"]

@@ -19,7 +19,7 @@ services:
       - db:/var/lib/mysql
 
   redis:
-    image: redis:4-alpine
+    image: docker.io/redis:4-alpine
     command: redis-server
     volumes:
       - redis:/data
@@ -41,29 +41,11 @@ services:
     depends_on:
       web:
         condition: service_started
-      tps-db:
-        condition: service_healthy
     environment:
-      GIN_MODE: "release"
-      BIND_ADDR: ":8080"
-      DATABASE_DSN: "tps:tps@tcp(tps-db:3306)/tps?parseTime=true"
-      PROXY_TARGET: "http://web:3000"
-
-  tps-db:
-    image: mariadb:lts
-    environment:
-      MYSQL_DATABASE: tps
-      MYSQL_USER: tps
-      MYSQL_PASSWORD: tps
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      LOG_RETENTION: "24h"
+      TOKEN_LIFETIME: "24h"
     volumes:
-      - tps-db:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
+      - tps-data:/var/local/tps/data
 
   app-base: &base
     build:
@@ -111,7 +93,7 @@ services:
 volumes:
   data-solr-dev: {}
   db: {}
-  tps-db: {}
+  tps-data: {}
   redis: {}
   caddy-data: {}
   caddy-config: {}

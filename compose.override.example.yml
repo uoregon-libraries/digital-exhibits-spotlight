@@ -33,6 +33,7 @@ services:
       TURNSTILE_SITE_KEY: "<cloudflare turnstile widget site key>"
       TURNSTILE_SECRET_KEY: "<cloudflare turnstile widget secret key>"
       JWT_SIGNING_KEY: "shhhhhh-this-is-very-secret"
+      ADMIN_SECRET: "choose-another-long-random-value"
 
       # Use these for testing the "success" route - these are Turnstile test
       # keys that make the challenge always auto-pass
