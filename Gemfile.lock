@@ -345,7 +345,9 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.8)
-    nokogiri (1.14.2-x86_64-linux)
+    nokogiri (1.18.10-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -378,7 +380,7 @@ GEM
     public_suffix (5.0.1)
     puma (6.1.0)
       nio4r (~> 2.0)
-    racc (1.6.2)
+    racc (1.8.1)
     rack (2.2.6.2)
     rack-protection (3.0.6)
       rack
@@ -428,7 +430,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     retriable (3.1.2)
-    rexml (3.2.5)
+    rexml (3.4.4)
     riiif (2.4.0)
       deprecation (>= 1.0.0)
       iiif-image-api (>= 0.1.0)
@@ -485,7 +487,7 @@ GEM
       rubocop-capybara (~> 2.17)
     ruby-oembed (0.16.1)
     ruby-progressbar (1.11.0)
-    ruby-saml (1.15.0)
+    ruby-saml (1.18.1)
       nokogiri (>= 1.13.10)
       rexml
     ruby-vips (2.1.4)
